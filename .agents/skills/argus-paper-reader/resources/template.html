@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><!-- ARGUS_PAGE_TITLE --> | Argus Academic Paper Reader</title>
+
+  <!-- Google Fonts CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <!-- KaTeX CDN for Academic Formula Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+
+  <style>
+    /* ==========================================================================
+       Argus Paper Reader - Editorial Academic Journal Theme
+       ========================================================================== */
+    :root {
+      /* Base Colors */
+      --color-navy: #0f1e36;
+      --color-navy-dark: #0a1424;
+      --color-navy-light: #1b2f4f;
+      --color-paper: #faf8f5;
+      --color-paper-card: #ffffff;
+      --color-paper-subtle: #f4f1ea;
+      --color-trans-bg: #f0ece2;
+      --color-border: #e2ddd3;
+      --color-border-subtle: #ece8e1;
+      --color-text-primary: #1f2937;
+      --color-text-secondary: #4b5563;
+      --color-text-muted: #6b7280;
+      --color-gold: #c59b27;
+      --color-accent-bar: #8c7a6b;
+
+      /* Five-Lens Palette (Soft Background, Border, Text, Shadow) */
+      --lens-thesis-bg: #fef3c7;
+      --lens-thesis-border: #d97706;
+      --lens-thesis-text: #92400e;
+      --lens-thesis-badge: #b45309;
+
+      --lens-concept-bg: #ffe4e6;
+      --lens-concept-border: #e11d48;
+      --lens-concept-text: #9f1239;
+      --lens-concept-badge: #be123c;
+
+      --lens-evidence-bg: #e0f2fe;
+      --lens-evidence-border: #0284c7;
+      --lens-evidence-text: #075985;
+      --lens-evidence-badge: #0369a1;
+
+      --lens-rebuttal-bg: #dcfce7;
+      --lens-rebuttal-border: #16a34a;
+      --lens-rebuttal-text: #166534;
+      --lens-rebuttal-badge: #15803d;
+
+      --lens-method-bg: #f3e8ff;
+      --lens-method-border: #9333ea;
+      --lens-method-text: #6b21a8;
+      --lens-method-badge: #7e22ce;
+
+      /* Typography */
+      --font-en: 'Lora', Georgia, 'Times New Roman', serif;
+      --font-zh: 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC', serif;
+      --font-ui: 'IBM Plex Sans', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 3px rgba(15, 30, 54, 0.05);
+      --shadow-md: 0 4px 12px rgba(15, 30, 54, 0.08);
+      --shadow-lg: 0 10px 25px rgba(15, 30, 54, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      background-color: var(--color-paper);
+      color: var(--color-text-primary);
+    }
+
+    body {
+      font-family: var(--font-ui);
+      background-color: var(--color-paper);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Reading Progress Bar */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      z-index: 1000;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #d97706, #e11d48, #0284c7, #16a34a, #9333ea);
+      transition: width 0.1s ease-out;
+    }
+
+    /* ==========================================================================
+       Header & Brand Navigation
+       ========================================================================== */
+    .argus-header {
+      background-color: var(--color-navy);
+      color: #ffffff;
+      padding: 1.25rem 2rem 1.5rem 2rem;
+      border-bottom: 2px solid #223758;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      z-index: 900;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .argus-logo-svg {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+      background: rgba(197, 155, 39, 0.25);
+      border: 1px solid var(--color-gold);
+      color: #ffd875;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      font-size: 0.82rem;
+      color: #a4b3c9;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+    }
+
+    /* Paper Title and Authors in Header */
+    .paper-info {
+      max-width: 900px;
+      margin-top: 0.5rem;
+    }
+
+    .paper-title {
+      font-family: var(--font-en);
+      font-size: 1.65rem;
+      font-weight: 600;
+      color: #f8fafc;
+      line-height: 1.35;
+      margin-bottom: 0.45rem;
+      letter-spacing: -0.01em;
+    }
+
+    .paper-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem 1.25rem;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+    }
+
+    .paper-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .paper-meta-item svg {
+      opacity: 0.75;
+    }
+
+    /* Header Controls (Spotlight Filter + View Toggle) */
+    .header-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .filter-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      margin-right: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .lens-btn {
+      appearance: none;
+      border: 1px solid transparent;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      font-family: var(--font-ui);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    }
+
+    .lens-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+    }
+
+    .lens-btn .lens-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .lens-btn[data-dim="all"] {
+      background: #253959;
+      color: #e2e8f0;
+      border-color: #3b5278;
+    }
+    .lens-btn[data-dim="all"].active {
+      background: #3b82f6;
+      color: #ffffff;
+      border-color: #60a5fa;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+    }
+
+    .lens-btn[data-dim="thesis"] {
+      background: rgba(254, 243, 199, 0.18);
+      color: #fde68a;
+      border-color: rgba(217, 119, 6, 0.4);
+    }
+    .lens-btn[data-dim="thesis"].active {
+      background: #d97706;
+      color: #ffffff;
+      border-color: #f59e0b;
+      box-shadow: 0 0 12px rgba(217, 119, 6, 0.6);
+    }
+    .lens-btn[data-dim="thesis"] .lens-dot { background: #f59e0b; }
+
+    .lens-btn[data-dim="concept"] {
+      background: rgba(255, 228, 230, 0.18);
+      color: #fecdd3;
+      border-color: rgba(225, 29, 72, 0.4);
+    }
+    .lens-btn[data-dim="concept"].active {
+      background: #e11d48;
+      color: #ffffff;
+      border-color: #fb7185;
+      box-shadow: 0 0 12px rgba(225, 29, 72, 0.6);
+    }
+    .lens-btn[data-dim="concept"] .lens-dot { background: #f43f5e; }
+
+    .lens-btn[data-dim="evidence"] {
+      background: rgba(224, 242, 254, 0.18);
+      color: #bae6fd;
+      border-color: rgba(2, 132, 199, 0.4);
+    }
+    .lens-btn[data-dim="evidence"].active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #38bdf8;
+      box-shadow: 0 0 12px rgba(2, 132, 199, 0.6);
+    }
+    .lens-btn[data-dim="evidence"] .lens-dot { background: #0ea5e9; }
+
+    .lens-btn[data-dim="rebuttal"] {
+      background: rgba(220, 252, 231, 0.18);
+      color: #bbf7d0;
+      border-color: rgba(22, 163, 74, 0.4);
+    }
+    .lens-btn[data-dim="rebuttal"].active {
+      background: #16a34a;
+      color: #ffffff;
+      border-color: #4ade80;
+      box-shadow: 0 0 12px rgba(22, 163, 74, 0.6);
+    }
+    .lens-btn[data-dim="rebuttal"] .lens-dot { background: #22c55e; }
+
+    .lens-btn[data-dim="method"] {
+      background: rgba(243, 232, 255, 0.18);
+      color: #e9d5ff;
+      border-color: rgba(147, 51, 234, 0.4);
+    }
+    .lens-btn[data-dim="method"].active {
+      background: #9333ea;
+      color: #ffffff;
+      border-color: #c084fc;
+      box-shadow: 0 0 12px rgba(147, 51, 234, 0.6);
+    }
+    .lens-btn[data-dim="method"] .lens-dot { background: #a855f7; }
+
+    /* View Switcher Controls */
+    .view-switcher {
+      display: flex;
+      background: #192a47;
+      border: 1px solid #2d4368;
+      padding: 3px;
+      border-radius: 8px;
+      gap: 3px;
+    }
+
+    .view-btn {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      padding: 0.35rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: var(--font-ui);
+    }
+
+    .view-btn:hover {
+      color: #ffffff;
+    }
+
+    .view-btn.active {
+      background: #28416c;
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    /* ==========================================================================
+       Sticky Section Bar
+       ========================================================================== */
+    .sticky-nav-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 850;
+      background: #ffffff;
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sticky-nav {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-border) transparent;
+    }
+
+    .sticky-nav::-webkit-scrollbar {
+      height: 4px;
+    }
+    .sticky-nav::-webkit-scrollbar-thumb {
+      background: var(--color-border);
+      border-radius: 4px;
+    }
+
+    .nav-anchor-item {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.85rem 0.25rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav-anchor-item:hover {
+      color: var(--color-navy);
+      border-bottom-color: #94a3b8;
+    }
+
+    .nav-anchor-item.active {
+      color: var(--color-navy);
+      border-bottom-color: var(--color-navy);
+    }
+
+    .nav-anchor-item .sec-idx {
+      margin-right: 0.4rem;
+      color: var(--color-gold);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+
+    /* ==========================================================================
+       Main Paper Content Container
+       ========================================================================== */
+    .paper-container {
+      max-width: 1380px;
+      width: 100%;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      flex: 1;
+    }
+
+    .section-block {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--color-navy);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-en);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--color-navy);
+      letter-spacing: -0.01em;
+    }
+
+    .section-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    /* ==========================================================================
+       Paragraph-Pair Grid (.para-row)
+       ========================================================================== */
+    .para-row {
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: 2.25rem;
+      align-items: start;
+      margin-bottom: 2.25rem;
+      position: relative;
+    }
+
+    /* Left Cell: English Original + Divider + Chinese Translation */
+    .para-left {
+      background: var(--color-paper-card);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.65rem 1.75rem;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .para-left:hover {
+      box-shadow: var(--shadow-md);
+      border-color: #cfc8bd;
+    }
+
+    .para-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #64748b;
+      background: #f1f5f9;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      border: 1px solid #e2e8f0;
+      letter-spacing: 0.05em;
+    }
+
+    .en-content {
+      font-family: var(--font-en);
+      font-size: 1.05rem;
+      line-height: 1.78;
+      color: #1a202c;
+      letter-spacing: 0.005em;
+    }
+
+    .para-divider {
+      height: 1px;
+      background-color: var(--color-border);
+      margin: 1.35rem 0;
+      border: none;
+    }
+
+    .trans-block {
+      background-color: var(--color-trans-bg);
+      border-left: 3.5px solid var(--color-accent-bar);
+      border-radius: 0 8px 8px 0;
+      padding: 1.15rem 1.35rem;
+      font-family: var(--font-zh);
+      font-size: 0.98rem;
+      line-height: 1.75;
+      color: #2c251e;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .trans-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #786b5e;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .trans-toggle-pill {
+      font-size: 0.7rem;
+      color: #8c7a6b;
+      cursor: pointer;
+      background: rgba(140, 122, 107, 0.12);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: none;
+      display: none; /* activated in collapsible view */
+      font-family: var(--font-ui);
+      font-weight: 600;
+    }
+
+    .trans-toggle-pill:hover {
+      background: rgba(140, 122, 107, 0.25);
+    }
+
+    /* Five-Lens Highlight Mark Styles */
+    mark.hl {
+      background: transparent;
+      border-bottom-width: 2px;
+      border-bottom-style: solid;
+      border-radius: 3px;
+      padding: 0.12em 0.28em;
+      margin: 0 0.05em;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    mark.hl-thesis {
+      background-color: var(--lens-thesis-bg);
+      border-bottom-color: var(--lens-thesis-border);
+      color: var(--lens-thesis-text);
+    }
+
+    mark.hl-concept {
+      background-color: var(--lens-concept-bg);
+      border-bottom-color: var(--lens-concept-border);
+      color: var(--lens-concept-text);
+    }
+
+    mark.hl-evidence {
+      background-color: var(--lens-evidence-bg);
+      border-bottom-color: var(--lens-evidence-border);
+      color: var(--lens-evidence-text);
+    }
+
+    mark.hl-rebuttal {
+      background-color: var(--lens-rebuttal-bg);
+      border-bottom-color: var(--lens-rebuttal-border);
+      color: var(--lens-rebuttal-text);
+    }
+
+    mark.hl-method {
+      background-color: var(--lens-method-bg);
+      border-bottom-color: var(--lens-method-border);
+      color: var(--lens-method-text);
+    }
+
+    /* Hover Micro-Badge Tooltip */
+    mark.hl::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: calc(100% + 4px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: var(--color-navy);
+      color: #ffffff;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      font-family: var(--font-ui);
+      font-size: 0.68rem;
+      font-weight: 600;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      z-index: 50;
+      letter-spacing: 0.02em;
+    }
+
+    mark.hl:hover::after {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Spotlight Filter Dimmed State */
+    body.spotlight-active mark.hl:not(.spotlight-target) {
+      opacity: 0.22;
+      filter: grayscale(60%);
+      background-color: rgba(226, 221, 211, 0.3) !important;
+      border-bottom-color: #cbd5e1 !important;
+      color: inherit !important;
+    }
+
+    body.spotlight-active mark.hl.spotlight-target {
+      opacity: 1;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0,0,0,0.12);
+      font-weight: 500;
+    }
+
+    /* View Switcher Modes */
+    body.mode-en-only .para-divider,
+    body.mode-en-only .trans-block {
+      display: none !important;
+    }
+
+    body.mode-collapsible .trans-toggle-pill {
+      display: inline-block;
+    }
+
+    body.mode-collapsible .trans-block:not(.expanded) .trans-content {
+      display: none;
+    }
+
+    body.mode-collapsible .trans-block:not(.expanded) {
+      padding: 0.5rem 0.85rem;
+      background-color: #f7f5ef;
+    }
+
+    /* ==========================================================================
+       Right Cell: Chinese Commentary Card (.annotation-card)
+       ========================================================================== */
+    .para-right {
+      position: relative;
+    }
+
+    .annotation-card {
+      background: #ffffff;
+      border: 1px solid var(--color-border);
+      border-left: 4px solid var(--color-navy);
+      border-radius: 12px;
+      padding: 1.4rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .annotation-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    /* Accent color mapping based on dominant function */
+    .annotation-card[data-dominant="thesis"] { border-left-color: var(--lens-thesis-border); }
+    .annotation-card[data-dominant="concept"] { border-left-color: var(--lens-concept-border); }
+    .annotation-card[data-dominant="evidence"] { border-left-color: var(--lens-evidence-border); }
+    .annotation-card[data-dominant="rebuttal"] { border-left-color: var(--lens-rebuttal-border); }
+    .annotation-card[data-dominant="method"] { border-left-color: var(--lens-method-border); }
+
+    .card-tier {
+      margin-bottom: 1.15rem;
+    }
+
+    .card-tier:last-child {
+      margin-bottom: 0;
+    }
+
+    .tier-header {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .tier-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Tier 1: Paragraph Function Badge */
+    .func-capsule {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: #f1f5f9;
+      color: var(--color-navy);
+      border: 1px solid #cbd5e1;
+    }
+
+    .func-capsule.func-thesis { background: var(--lens-thesis-bg); color: var(--lens-thesis-text); border-color: #fde68a; }
+    .func-capsule.func-concept { background: var(--lens-concept-bg); color: var(--lens-concept-text); border-color: #fecdd3; }
+    .func-capsule.func-evidence { background: var(--lens-evidence-bg); color: var(--lens-evidence-text); border-color: #bae6fd; }
+    .func-capsule.func-rebuttal { background: var(--lens-rebuttal-bg); color: var(--lens-rebuttal-text); border-color: #bbf7d0; }
+    .func-capsule.func-method { background: var(--lens-method-bg); color: var(--lens-method-text); border-color: #e9d5ff; }
+
+    /* Tier 2: Logical Role */
+    .role-desc {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--color-text-secondary);
+      background: #fafaf9;
+      padding: 0.65rem 0.85rem;
+      border-radius: 6px;
+      border: 1px solid #f0eeea;
+    }
+
+    /* Tier 3: Argus Gaze (Technique & Vulnerability) */
+    .argus-gaze-box {
+      background: var(--color-paper-subtle);
+      border: 1px solid #e7e2d7;
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .gaze-subitem {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .gaze-subhead {
+      font-weight: 700;
+      font-size: 0.76rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .gaze-technique .gaze-subhead { color: #1e3a8a; }
+    .gaze-technique .gaze-text { color: #1e293b; }
+
+    .gaze-vulnerability .gaze-subhead { color: #991b1b; }
+    .gaze-vulnerability .gaze-text { color: #374151; }
+
+    /* ==========================================================================
+       Module 4: Bottom Synthesis Dashboard (.synthesis-dashboard)
+       ========================================================================== */
+    .synthesis-dashboard {
+      background: #ffffff;
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 2.25rem;
+      box-shadow: var(--shadow-md);
+      margin-top: 3.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .dashboard-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--color-navy);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .dashboard-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--color-navy);
+    }
+
+    .dashboard-badge {
+      background: var(--color-navy);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      letter-spacing: 0.05em;
+    }
+
+    /* Logic Skeleton Pipeline */
+    .skeleton-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .sub-section-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #64748b;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skeleton-pipeline {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.75rem;
+      position: relative;
+    }
+
+    .skeleton-node {
+      background: var(--color-paper);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 1rem 0.9rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s ease;
+    }
+
+    .skeleton-node:hover {
+      border-color: var(--color-navy);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .skeleton-step-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+
+    .skeleton-node-title {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--color-navy);
+      margin-bottom: 0.4rem;
+      line-height: 1.35;
+    }
+
+    .skeleton-node-desc {
+      font-size: 0.76rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Core Thesis Callout */
+    .thesis-callout-card {
+      background: linear-gradient(135deg, #fdfbf7 0%, #f7f3eb 100%);
+      border: 1px solid #dfd8c9;
+      border-left: 6px solid var(--color-gold);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .thesis-callout-quote-icon {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.5rem;
+      font-size: 3.5rem;
+      color: rgba(197, 155, 39, 0.18);
+      font-family: var(--font-en);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .thesis-callout-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #92400e;
+      margin-bottom: 0.6rem;
+    }
+
+    .thesis-callout-text {
+      font-family: var(--font-zh);
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.7;
+      color: #1c1917;
+    }
+
+    /* Strength vs. Achilles' Heel Grid */
+    .critique-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+    }
+
+    .critique-card {
+      border-radius: 12px;
+      padding: 1.5rem 1.65rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      position: relative;
+    }
+
+    .critique-card.card-strength {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-top: 4px solid #16a34a;
+    }
+
+    .critique-card.card-achilles {
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-top: 4px solid #e11d48;
+    }
+
+    .critique-title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .card-strength .critique-title-row { color: #166534; }
+    .card-achilles .critique-title-row { color: #9f1239; }
+
+    .critique-body {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--color-text-secondary);
+    }
+
+    /* ==========================================================================
+       Footer
+       ========================================================================== */
+    .argus-footer {
+      background: var(--color-navy);
+      color: #94a3b8;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      border-top: 1px solid #1e3352;
+      margin-top: auto;
+    }
+
+    .argus-footer a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    .argus-footer a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .footer-sub {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    /* ==========================================================================
+       Responsive & Print Media Queries
+       ========================================================================== */
+    @media (max-width: 1100px) {
+      .skeleton-pipeline {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 960px) {
+      .para-row {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+      .paper-container {
+        padding: 0 1rem;
+      }
+      .argus-header {
+        padding: 1rem;
+      }
+      .header-controls {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .critique-grid {
+        grid-template-columns: 1fr;
+      }
+      .skeleton-pipeline {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      #progress-container,
+      .header-controls,
+      .sticky-nav-wrapper,
+      .trans-toggle-pill {
+        display: none !important;
+      }
+      .para-row {
+        page-break-inside: avoid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+      body {
+        background: #ffffff !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Reading Progress Bar -->
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- Header & Brand Navigation -->
+  <header class="argus-header">
+    <div class="header-top">
+      <div class="brand-group">
+        <!-- Argus Minimalist Geometric Eye Logo SVG -->
+        <svg class="argus-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="46" stroke="#c59b27" stroke-width="2.5" stroke-dasharray="4 2" opacity="0.6"/>
+          <!-- Outer Eye Almond Contour -->
+          <path d="M12 50 C26 24 74 24 88 50 C74 76 26 76 12 50 Z" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
+          <!-- Iris Ring -->
+          <circle cx="50" cy="50" r="19" stroke="#60a5fa" stroke-width="3" fill="#112444"/>
+          <!-- Argus Pupil Core -->
+          <circle cx="50" cy="50" r="8" fill="#ffd875"/>
+          <!-- Micro-Vision Rays (Panoptes Eyes) -->
+          <circle cx="32" cy="42" r="2.5" fill="#f43f5e"/>
+          <circle cx="68" cy="42" r="2.5" fill="#38bdf8"/>
+          <circle cx="50" cy="27" r="2.5" fill="#4ade80"/>
+          <circle cx="50" cy="73" r="2.5" fill="#c084fc"/>
+        </svg>
+        <div class="brand-meta">
+          <div class="brand-title">
+            ARGUS PAPER READER
+            <span class="brand-tag">Panoptes v1.0</span>
+          </div>
+          <div class="brand-subtitle">阿耳戈斯学术论文双栏双语逻辑精读器</div>
+        </div>
+      </div>
+
+      <div class="paper-info">
+        <h1 class="paper-title"><!-- ARGUS_PAPER_TITLE --></h1>
+        <div class="paper-meta-row">
+          <div class="paper-meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span><!-- ARGUS_AUTHORS --></span>
+          </div>
+          <div class="paper-meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span><!-- ARGUS_YEAR_VENUE --></span>
+          </div>
+          <!-- ARGUS_EXTRA_META -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Header Controls: Lens Filters + View Switcher -->
+    <div class="header-controls">
+      <div class="filter-group">
+        <span class="filter-label">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          五维透镜 Spotlight:
+        </span>
+        <button class="lens-btn active" data-dim="all" title="显示全部标注">
+          全部
+        </button>
+        <button class="lens-btn" data-dim="thesis" title="聚焦核心论点 (Thesis)">
+          <span class="lens-dot"></span>核心论点
+        </button>
+        <button class="lens-btn" data-dim="concept" title="聚焦关键概念 (Concept)">
+          <span class="lens-dot"></span>关键概念
+        </button>
+        <button class="lens-btn" data-dim="evidence" title="聚焦实证证据 (Evidence)">
+          <span class="lens-dot"></span>实证证据
+        </button>
+        <button class="lens-btn" data-dim="rebuttal" title="聚焦让步反驳 (Rebuttal)">
+          <span class="lens-dot"></span>让步反驳
+        </button>
+        <button class="lens-btn" data-dim="method" title="聚焦方法论 (Methodology)">
+          <span class="lens-dot"></span>方法论
+        </button>
+      </div>
+
+      <div class="view-switcher">
+        <button class="view-btn active" data-mode="bilingual" title="英中完整双语对照">双语对照</button>
+        <button class="view-btn" data-mode="en-only" title="仅阅读英文正文与批注">仅看英文</button>
+        <button class="view-btn" data-mode="collapsible" title="折叠中文译文，支持逐段展开">折叠译文</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Section Anchor Nav -->
+  <div class="sticky-nav-wrapper">
+    <nav class="sticky-nav" id="sticky-nav">
+      <!-- ARGUS_SECTIONS_NAV -->
+    </nav>
+  </div>
+
+  <!-- Main Content Grid -->
+  <main class="paper-container">
+    <!-- ARGUS_BODY_CONTENT -->
+
+    <!-- Synthesis Dashboard -->
+    <section class="synthesis-dashboard" id="sec-synthesis">
+      <!-- ARGUS_SYNTHESIS_DASHBOARD -->
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="argus-footer">
+    <div class="footer-main">
+      Generated by <strong>Argus Paper Reader</strong> &mdash; All-Seeing Academic Companion
+    </div>
+    <div class="footer-sub">
+      Powered by Argus Five-Lens Analysis System &bull; Compatible with Google Antigravity & Claude Code
+    </div>
+  </footer>
+
+  <!-- Embedded Raw Data JSON (Optional) -->
+  <script id="argus-raw-data" type="application/json">
+    <!-- ARGUS_RAW_DATA_SCRIPT -->
+    {}
+  </script>
+
+  <!-- Client-side Interactive Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize KaTeX Auto-Render
+      if (typeof renderMathInElement === 'function') {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\[', right: '\\]', display: true },
+            { left: '\\(', right: '\\)', display: false }
+          ],
+          throwOnError: false
+        });
+      }
+
+      // 2. Reading Progress Bar
+      const progressBar = document.getElementById('progress-bar');
+      const updateProgress = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        if (progressBar) {
+          progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        }
+      };
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
+
+      // 3. Five-Lens Spotlight Filtering
+      const lensBtns = document.querySelectorAll('.lens-btn');
+      let currentSpotlight = 'all';
+
+      lensBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const dim = btn.getAttribute('data-dim');
+          if (dim === currentSpotlight && dim !== 'all') {
+            // Toggle off back to all
+            setSpotlight('all');
+          } else {
+            setSpotlight(dim);
+          }
+        });
+      });
+
+      function setSpotlight(dim) {
+        currentSpotlight = dim;
+        lensBtns.forEach(b => {
+          if (b.getAttribute('data-dim') === dim) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+
+        const allMarks = document.querySelectorAll('mark.hl');
+        if (dim === 'all') {
+          document.body.classList.remove('spotlight-active');
+          allMarks.forEach(m => m.classList.remove('spotlight-target'));
+        } else {
+          document.body.classList.add('spotlight-active');
+          allMarks.forEach(m => {
+            if (m.getAttribute('data-dim') === dim) {
+              m.classList.add('spotlight-target');
+            } else {
+              m.classList.remove('spotlight-target');
+            }
+          });
+        }
+      }
+
+      // 4. View Mode Switcher
+      const viewBtns = document.querySelectorAll('.view-btn');
+      viewBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const mode = btn.getAttribute('data-mode');
+          viewBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          document.body.classList.remove('mode-bilingual', 'mode-en-only', 'mode-collapsible');
+          if (mode === 'en-only') {
+            document.body.classList.add('mode-en-only');
+          } else if (mode === 'collapsible') {
+            document.body.classList.add('mode-collapsible');
+          } else {
+            document.body.classList.add('mode-bilingual');
+          }
+        });
+      });
+
+      // 5. Collapsible Translation Single Paragraph Toggle
+      document.querySelectorAll('.trans-toggle-pill').forEach(pill => {
+        pill.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const transBlock = pill.closest('.trans-block');
+          if (transBlock) {
+            transBlock.classList.toggle('expanded');
+            pill.textContent = transBlock.classList.contains('expanded') ? '折叠' : '展开译文';
+          }
+        });
+      });
+
+      // 6. Sticky Section Anchor Spy (IntersectionObserver)
+      const sectionBlocks = document.querySelectorAll('.section-block, .synthesis-dashboard');
+      const navLinks = document.querySelectorAll('.nav-anchor-item');
+
+      if ('IntersectionObserver' in window && sectionBlocks.length > 0) {
+        const observerOptions = {
+          root: null,
+          rootMargin: '-20% 0px -70% 0px',
+          threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute('id');
+              navLinks.forEach(link => {
+                if (link.getAttribute('href') === '#' + id) {
+                  link.classList.add('active');
+                } else {
+                  link.classList.remove('active');
+                }
+              });
+            }
+          });
+        }, observerOptions);
+
+        sectionBlocks.forEach(sec => observer.observe(sec));
+      }
+    });
+  </script>
+</body>
+</html>
