@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Argus Paper Reader - HTML Builder Script
-========================================
+Argus Paper Reader - HTML Builder Script (Editorial Edition)
+============================================================
 Compiles structured paper JSON data into a standalone, high-aesthetic HTML5 reader.
 Zero third-party dependencies (Python standard library only).
 
@@ -46,7 +46,7 @@ def render_sections_nav(sections, synthesis_data=None) -> str:
     if synthesis_data:
         nav_items.append(
             '<a class="nav-anchor-item" href="#sec-synthesis">'
-            '<span class="sec-idx">✦</span>论证总览 Dashboard'
+            '<span class="sec-idx">✦</span>论证总览'
             "</a>"
         )
 
@@ -73,10 +73,10 @@ def render_body_content(sections) -> str:
             func_text = ann.get("function", "核心论点阐述")
             role_text = ann.get("logical_role", "承前启后")
             gaze = ann.get("gaze", {})
-            tech_text = gaze.get("technique", "精妙的修辞与理论铺陈")
-            vuln_text = gaze.get("vulnerability", "审稿人视角下的潜在识别偏差")
+            tech_text = gaze.get("technique", "精妙的论证铺陈与直觉设计")
+            vuln_text = gaze.get("vulnerability", "审稿人视角下的潜在识别偏差与外推局限")
 
-            # Paragraph row template
+            # Paragraph row template (clean editorial without trans-header)
             row = f"""
       <div class="para-row" id="p-{p_idx}">
         <!-- Left Cell: English Original + Chinese Translation -->
@@ -85,10 +85,7 @@ def render_body_content(sections) -> str:
           <div class="en-content">{en_content}</div>
           <hr class="para-divider">
           <div class="trans-block">
-            <div class="trans-header">
-              <span>中文学术意译 (Top Journal Style)</span>
-              <button class="trans-toggle-pill" type="button">展开译文</button>
-            </div>
+            <button class="trans-collapse-toggle" type="button"><span class="toggle-arrow">▸</span> 展开中文译文</button>
             <div class="trans-content">{zh_content}</div>
           </div>
         </div>
@@ -122,20 +119,20 @@ def render_body_content(sections) -> str:
             <div class="card-tier">
               <div class="tier-header">
                 <svg class="tier-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                ③ Argus Gaze（论证技巧与潜在漏洞）
+                ③ 论证解剖 (Argus Gaze)
               </div>
               <div class="argus-gaze-box">
                 <div class="gaze-subitem gaze-technique">
                   <div class="gaze-subhead">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                    论证技巧 / Rhetoric & Design
+                    ✦ 论证设计与修辞
                   </div>
                   <div class="gaze-text">{tech_text}</div>
                 </div>
                 <div class="gaze-subitem gaze-vulnerability">
                   <div class="gaze-subhead">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    潜在漏洞 / Reviewer Vulnerability
+                    ⚑ 潜在漏洞与审稿质疑
                   </div>
                   <div class="gaze-text">{vuln_text}</div>
                 </div>
@@ -192,17 +189,17 @@ def render_synthesis_dashboard(synthesis) -> str:
     strength = synthesis.get("strength", {})
     achilles = synthesis.get("achilles_heel", {})
 
-    str_title = strength.get("title", "论证最强处 / Core Methodological Strength")
+    str_title = strength.get("title", "核心方法论优势")
     str_content = strength.get("content", "")
 
-    ach_title = achilles.get("title", "阿喀琉斯之踵 / Critical Achilles' Heel")
+    ach_title = achilles.get("title", "阿喀琉斯之踵（识别软肋）")
     ach_content = achilles.get("content", "")
 
     return f"""
       <div class="dashboard-header">
         <div class="dashboard-title-group">
-          <h2 class="dashboard-title">论证结构与批判性复盘 (Synthesis Dashboard)</h2>
-          <span class="dashboard-badge">ARGUS PANOPTES REVIEW</span>
+          <h2 class="dashboard-title">论证结构与全局复盘 (Synthesis Dashboard)</h2>
+          <span class="dashboard-badge">ARGUS REVIEW</span>
         </div>
       </div>
 
@@ -210,7 +207,7 @@ def render_synthesis_dashboard(synthesis) -> str:
       <div class="skeleton-section">
         <div class="sub-section-title">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          全文逻辑骨架流 (Logic Pipeline)
+          全文逻辑骨架
         </div>
         <div class="skeleton-pipeline">
           {pipeline_html}
@@ -220,7 +217,7 @@ def render_synthesis_dashboard(synthesis) -> str:
       <!-- One-Sentence Core Thesis Callout -->
       <div class="thesis-callout-card">
         <div class="thesis-callout-quote-icon">&ldquo;</div>
-        <div class="thesis-callout-label">作者核心主张一句话版本 / One-Sentence Core Thesis</div>
+        <div class="thesis-callout-label">核心主张（Core Thesis）</div>
         <div class="thesis-callout-text">{core_thesis}</div>
       </div>
 
@@ -285,12 +282,15 @@ def build_argus_html(data_path: Path, output_path: Path, template_path: Path = N
     venue = meta.get("venue", "")
     year_venue = f"{year} · {venue}" if (year and venue) else (year or venue or "Academic Paper")
 
-    extra_meta_html = ""
+    # Clean Eyebrow Links: DOI + Paper Link
+    extra_meta_items = []
     if "doi" in meta:
         doi = meta["doi"]
-        extra_meta_html += f'<div class="paper-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span>DOI: {doi}</span></div>'
+        doi_url = f"https://doi.org/{doi}" if not doi.startswith("http") else doi
+        extra_meta_items.append(f'<span>DOI: <a href="{doi_url}" target="_blank" rel="noopener">{doi}</a></span>')
     if "url" in meta:
-        extra_meta_html += f'<div class="paper-meta-item"><a href="{meta["url"]}" target="_blank" style="color:inherit;text-decoration:underline;">[Paper Link]</a></div>'
+        extra_meta_items.append(f'<a href="{meta["url"]}" target="_blank" rel="noopener">Paper Link &nearr;</a>')
+    extra_meta_html = ' &bull; '.join(extra_meta_items) if extra_meta_items else ""
 
     sections = data.get("sections", [])
     synthesis = data.get("synthesis", {})

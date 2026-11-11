@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Colonial Origins of Comparative Development: An Empirical Investigation | Argus Academic Paper Reader</title>
+  <title>The Colonial Origins of Comparative Development: An Empirical Investigation | Argus Academic Logic Reader</title>
 
   <!-- Google Fonts CDN -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
 
   <style>
     /* ==========================================================================
-       Argus Paper Reader - Editorial Academic Journal Theme
+       Argus Paper Reader - Editorial Academic Journal Theme (Masthead Edition)
        ========================================================================== */
     :root {
       /* Base Colors */
@@ -40,27 +40,22 @@
       --lens-thesis-bg: #fef3c7;
       --lens-thesis-border: #d97706;
       --lens-thesis-text: #92400e;
-      --lens-thesis-badge: #b45309;
 
       --lens-concept-bg: #ffe4e6;
       --lens-concept-border: #e11d48;
       --lens-concept-text: #9f1239;
-      --lens-concept-badge: #be123c;
 
       --lens-evidence-bg: #e0f2fe;
       --lens-evidence-border: #0284c7;
       --lens-evidence-text: #075985;
-      --lens-evidence-badge: #0369a1;
 
       --lens-rebuttal-bg: #dcfce7;
       --lens-rebuttal-border: #16a34a;
       --lens-rebuttal-text: #166534;
-      --lens-rebuttal-badge: #15803d;
 
       --lens-method-bg: #f3e8ff;
       --lens-method-border: #9333ea;
       --lens-method-text: #6b21a8;
-      --lens-method-badge: #7e22ce;
 
       /* Typography */
       --font-en: 'Lora', Georgia, 'Times New Roman', serif;
@@ -104,7 +99,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 4px;
+      height: 3px;
       background: transparent;
       z-index: 1000;
     }
@@ -117,323 +112,166 @@
     }
 
     /* ==========================================================================
-       Header & Brand Navigation
+       1. Top Journal Masthead (Academic Editorial Banner)
        ========================================================================== */
-    .argus-header {
+    .argus-masthead {
       background-color: var(--color-navy);
       color: #ffffff;
-      padding: 1.25rem 2rem 1.5rem 2rem;
-      border-bottom: 2px solid #223758;
-      box-shadow: var(--shadow-md);
+      padding: 1.5rem 2rem 1.85rem 2rem;
+      border-bottom: 1px solid #1e3352;
       position: relative;
       z-index: 900;
     }
 
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.25rem;
+    .masthead-inner {
+      max-width: 1380px;
+      margin: 0 auto;
     }
 
-    .brand-group {
+    /* Top Eyebrow: Minimal Brand Monogram + DOI/Links */
+    .masthead-eyebrow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      padding-bottom: 0.85rem;
+    }
+
+    .eyebrow-brand {
       display: flex;
       align-items: center;
-      gap: 0.85rem;
+      gap: 0.65rem;
     }
 
     .argus-logo-svg {
-      width: 40px;
-      height: 40px;
+      width: 20px;
+      height: 20px;
       flex-shrink: 0;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
     }
 
-    .brand-meta {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .brand-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+    .eyebrow-text {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #ffffff;
+      color: #94a3b8;
+    }
+
+    .eyebrow-links {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 1rem;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      font-family: var(--font-mono);
     }
 
-    .brand-tag {
-      font-size: 0.65rem;
-      letter-spacing: 0.05em;
-      background: rgba(197, 155, 39, 0.25);
-      border: 1px solid var(--color-gold);
-      color: #ffd875;
-      padding: 2px 7px;
-      border-radius: 4px;
-      font-weight: 600;
-      text-transform: uppercase;
+    .eyebrow-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: color 0.15s ease;
     }
 
-    .brand-subtitle {
-      font-size: 0.82rem;
-      color: #a4b3c9;
-      font-weight: 400;
-      letter-spacing: 0.03em;
+    .eyebrow-links a:hover {
+      color: #ffffff;
+      text-decoration: underline;
     }
 
-    /* Paper Title and Authors in Header */
-    .paper-info {
-      max-width: 900px;
-      margin-top: 0.5rem;
+    .masthead-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.12);
+      margin-bottom: 1.25rem;
+    }
+
+    /* Main Visual Area: Focused Paper Information */
+    .masthead-main {
+      max-width: 1100px;
     }
 
     .paper-title {
       font-family: var(--font-en);
-      font-size: 1.65rem;
+      font-size: 1.85rem;
       font-weight: 600;
-      color: #f8fafc;
-      line-height: 1.35;
-      margin-bottom: 0.45rem;
-      letter-spacing: -0.01em;
+      line-height: 1.32;
+      color: #fdfbf7;
+      margin-bottom: 0.65rem;
+      letter-spacing: -0.015em;
     }
 
     .paper-meta-row {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 0.75rem 1.25rem;
-      font-size: 0.85rem;
+      gap: 0.65rem 1.25rem;
+      font-size: 0.88rem;
       color: #cbd5e1;
     }
 
     .paper-meta-item {
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .paper-meta-item svg {
-      opacity: 0.75;
-    }
-
-    /* Header Controls (Spotlight Filter + View Toggle) */
-    .header-controls {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .filter-group {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .filter-label {
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #94a3b8;
-      margin-right: 0.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .lens-btn {
-      appearance: none;
-      border: 1px solid transparent;
-      padding: 0.35rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      font-family: var(--font-ui);
-      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      user-select: none;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.15);
     }
 
-    .lens-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 3px 6px rgba(0,0,0,0.25);
-    }
-
-    .lens-btn .lens-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
+    .paper-meta-item svg {
+      opacity: 0.8;
       flex-shrink: 0;
     }
 
-    .lens-btn[data-dim="all"] {
-      background: #253959;
-      color: #e2e8f0;
-      border-color: #3b5278;
-    }
-    .lens-btn[data-dim="all"].active {
-      background: #3b82f6;
-      color: #ffffff;
-      border-color: #60a5fa;
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
-    }
-
-    .lens-btn[data-dim="thesis"] {
-      background: rgba(254, 243, 199, 0.18);
-      color: #fde68a;
-      border-color: rgba(217, 119, 6, 0.4);
-    }
-    .lens-btn[data-dim="thesis"].active {
-      background: #d97706;
-      color: #ffffff;
-      border-color: #f59e0b;
-      box-shadow: 0 0 12px rgba(217, 119, 6, 0.6);
-    }
-    .lens-btn[data-dim="thesis"] .lens-dot { background: #f59e0b; }
-
-    .lens-btn[data-dim="concept"] {
-      background: rgba(255, 228, 230, 0.18);
-      color: #fecdd3;
-      border-color: rgba(225, 29, 72, 0.4);
-    }
-    .lens-btn[data-dim="concept"].active {
-      background: #e11d48;
-      color: #ffffff;
-      border-color: #fb7185;
-      box-shadow: 0 0 12px rgba(225, 29, 72, 0.6);
-    }
-    .lens-btn[data-dim="concept"] .lens-dot { background: #f43f5e; }
-
-    .lens-btn[data-dim="evidence"] {
-      background: rgba(224, 242, 254, 0.18);
-      color: #bae6fd;
-      border-color: rgba(2, 132, 199, 0.4);
-    }
-    .lens-btn[data-dim="evidence"].active {
-      background: #0284c7;
-      color: #ffffff;
-      border-color: #38bdf8;
-      box-shadow: 0 0 12px rgba(2, 132, 199, 0.6);
-    }
-    .lens-btn[data-dim="evidence"] .lens-dot { background: #0ea5e9; }
-
-    .lens-btn[data-dim="rebuttal"] {
-      background: rgba(220, 252, 231, 0.18);
-      color: #bbf7d0;
-      border-color: rgba(22, 163, 74, 0.4);
-    }
-    .lens-btn[data-dim="rebuttal"].active {
-      background: #16a34a;
-      color: #ffffff;
-      border-color: #4ade80;
-      box-shadow: 0 0 12px rgba(22, 163, 74, 0.6);
-    }
-    .lens-btn[data-dim="rebuttal"] .lens-dot { background: #22c55e; }
-
-    .lens-btn[data-dim="method"] {
-      background: rgba(243, 232, 255, 0.18);
-      color: #e9d5ff;
-      border-color: rgba(147, 51, 234, 0.4);
-    }
-    .lens-btn[data-dim="method"].active {
-      background: #9333ea;
-      color: #ffffff;
-      border-color: #c084fc;
-      box-shadow: 0 0 12px rgba(147, 51, 234, 0.6);
-    }
-    .lens-btn[data-dim="method"] .lens-dot { background: #a855f7; }
-
-    /* View Switcher Controls */
-    .view-switcher {
-      display: flex;
-      background: #192a47;
-      border: 1px solid #2d4368;
-      padding: 3px;
-      border-radius: 8px;
-      gap: 3px;
-    }
-
-    .view-btn {
-      appearance: none;
-      border: none;
-      background: transparent;
-      color: #94a3b8;
-      padding: 0.35rem 0.75rem;
-      font-size: 0.78rem;
-      font-weight: 500;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      font-family: var(--font-ui);
-    }
-
-    .view-btn:hover {
-      color: #ffffff;
-    }
-
-    .view-btn.active {
-      background: #28416c;
-      color: #ffffff;
-      font-weight: 600;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    .meta-separator {
+      color: #64748b;
+      font-size: 0.75rem;
     }
 
     /* ==========================================================================
-       Sticky Section Bar
+       2. Unified Sticky Glass Toolbar (Section Nav + Lens + View Controls)
        ========================================================================== */
-    .sticky-nav-wrapper {
+    .sticky-toolbar-wrapper {
       position: sticky;
       top: 0;
       z-index: 850;
-      background: #ffffff;
+      background: rgba(250, 248, 245, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--color-border);
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 2px 8px rgba(15, 30, 54, 0.04);
     }
 
-    .sticky-nav {
+    .sticky-toolbar {
       max-width: 1380px;
       margin: 0 auto;
-      padding: 0 2rem;
+      padding: 0.45rem 2rem;
       display: flex;
+      justify-content: space-between;
       align-items: center;
       gap: 1.5rem;
-      overflow-x: auto;
-      white-space: nowrap;
-      scrollbar-width: thin;
-      scrollbar-color: var(--color-border) transparent;
+      flex-wrap: wrap;
     }
 
-    .sticky-nav::-webkit-scrollbar {
-      height: 4px;
+    /* Left: Section Anchor Navigation */
+    .toolbar-sections {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
-    .sticky-nav::-webkit-scrollbar-thumb {
-      background: var(--color-border);
-      border-radius: 4px;
+
+    .toolbar-sections::-webkit-scrollbar {
+      display: none;
     }
 
     .nav-anchor-item {
       display: inline-flex;
       align-items: center;
-      padding: 0.85rem 0.25rem;
+      padding: 0.45rem 0.25rem;
       font-size: 0.82rem;
       font-weight: 600;
-      color: var(--color-text-secondary);
+      color: #4b5563;
       text-decoration: none;
-      border-bottom: 3px solid transparent;
+      border-bottom: 2px solid transparent;
       transition: all 0.2s ease;
     }
 
@@ -445,22 +283,159 @@
     .nav-anchor-item.active {
       color: var(--color-navy);
       border-bottom-color: var(--color-navy);
+      font-weight: 700;
     }
 
     .nav-anchor-item .sec-idx {
-      margin-right: 0.4rem;
+      margin-right: 0.35rem;
       color: var(--color-gold);
       font-family: var(--font-mono);
       font-size: 0.75rem;
     }
 
+    /* Right: Toolbar Controls (Spotlight Filters + View Switcher) */
+    .toolbar-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-right: 0.15rem;
+    }
+
+    .lens-btn {
+      appearance: none;
+      border: 1px solid var(--color-border);
+      background: #ffffff;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: var(--font-ui);
+      color: #4b5563;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.18s ease;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .lens-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      border-color: #cbd5e1;
+    }
+
+    .lens-btn .lens-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .lens-btn[data-dim="all"].active {
+      background: var(--color-navy);
+      color: #ffffff;
+      border-color: var(--color-navy);
+    }
+
+    .lens-btn[data-dim="thesis"] .lens-dot { background: var(--lens-thesis-border); }
+    .lens-btn[data-dim="thesis"].active {
+      background: var(--lens-thesis-bg);
+      color: var(--lens-thesis-text);
+      border-color: var(--lens-thesis-border);
+      box-shadow: 0 0 0 1px var(--lens-thesis-border);
+    }
+
+    .lens-btn[data-dim="concept"] .lens-dot { background: var(--lens-concept-border); }
+    .lens-btn[data-dim="concept"].active {
+      background: var(--lens-concept-bg);
+      color: var(--lens-concept-text);
+      border-color: var(--lens-concept-border);
+      box-shadow: 0 0 0 1px var(--lens-concept-border);
+    }
+
+    .lens-btn[data-dim="evidence"] .lens-dot { background: var(--lens-evidence-border); }
+    .lens-btn[data-dim="evidence"].active {
+      background: var(--lens-evidence-bg);
+      color: var(--lens-evidence-text);
+      border-color: var(--lens-evidence-border);
+      box-shadow: 0 0 0 1px var(--lens-evidence-border);
+    }
+
+    .lens-btn[data-dim="rebuttal"] .lens-dot { background: var(--lens-rebuttal-border); }
+    .lens-btn[data-dim="rebuttal"].active {
+      background: var(--lens-rebuttal-bg);
+      color: var(--lens-rebuttal-text);
+      border-color: var(--lens-rebuttal-border);
+      box-shadow: 0 0 0 1px var(--lens-rebuttal-border);
+    }
+
+    .lens-btn[data-dim="method"] .lens-dot { background: var(--lens-method-border); }
+    .lens-btn[data-dim="method"].active {
+      background: var(--lens-method-bg);
+      color: var(--lens-method-text);
+      border-color: var(--lens-method-border);
+      box-shadow: 0 0 0 1px var(--lens-method-border);
+    }
+
+    /* View Switcher */
+    .view-switcher {
+      display: flex;
+      background: #eae5dc;
+      border: 1px solid #d9d2c6;
+      padding: 2px;
+      border-radius: 7px;
+      gap: 2px;
+    }
+
+    .view-btn {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: #64748b;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.74rem;
+      font-weight: 500;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: var(--font-ui);
+    }
+
+    .view-btn:hover {
+      color: var(--color-navy);
+    }
+
+    .view-btn.active {
+      background: #ffffff;
+      color: var(--color-navy);
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
     /* ==========================================================================
-       Main Paper Content Container
+       3. Main Paper Content Container
        ========================================================================== */
     .paper-container {
       max-width: 1380px;
       width: 100%;
-      margin: 2rem auto;
+      margin: 2.25rem auto;
       padding: 0 2rem;
       flex: 1;
     }
@@ -471,7 +446,7 @@
 
     .section-header {
       margin-bottom: 1.5rem;
-      padding-bottom: 0.75rem;
+      padding-bottom: 0.65rem;
       border-bottom: 2px solid var(--color-navy);
       display: flex;
       align-items: baseline;
@@ -494,7 +469,7 @@
     }
 
     /* ==========================================================================
-       Paragraph-Pair Grid (.para-row)
+       4. Paragraph-Pair Grid (.para-row)
        ========================================================================== */
     .para-row {
       display: grid;
@@ -505,7 +480,7 @@
       position: relative;
     }
 
-    /* Left Cell: English Original + Divider + Chinese Translation */
+    /* Left Cell: English Original + Translation */
     .para-left {
       background: var(--color-paper-card);
       border: 1px solid var(--color-border);
@@ -532,7 +507,7 @@
       background: #f1f5f9;
       padding: 0.15rem 0.5rem;
       border-radius: 4px;
-      margin-bottom: 1rem;
+      margin-bottom: 0.95rem;
       border: 1px solid #e2e8f0;
       letter-spacing: 0.05em;
     }
@@ -548,15 +523,16 @@
     .para-divider {
       height: 1px;
       background-color: var(--color-border);
-      margin: 1.35rem 0;
+      margin: 1.25rem 0;
       border: none;
     }
 
+    /* Pure Chinese Translation Block (Clean & Academic) */
     .trans-block {
       background-color: var(--color-trans-bg);
       border-left: 3.5px solid var(--color-accent-bar);
       border-radius: 0 8px 8px 0;
-      padding: 1.15rem 1.35rem;
+      padding: 1.1rem 1.35rem;
       font-family: var(--font-zh);
       font-size: 0.98rem;
       line-height: 1.75;
@@ -565,37 +541,33 @@
       transition: all 0.2s ease;
     }
 
-    .trans-header {
-      display: flex;
-      justify-content: space-between;
+    .trans-content {
+      letter-spacing: 0.01em;
+    }
+
+    /* Expand / Collapse Button in Collapsible Mode */
+    .trans-collapse-toggle {
+      display: none;
       align-items: center;
-      margin-bottom: 0.5rem;
+      gap: 0.35rem;
       font-family: var(--font-ui);
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: #786b5e;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .trans-toggle-pill {
-      font-size: 0.7rem;
-      color: #8c7a6b;
-      cursor: pointer;
-      background: rgba(140, 122, 107, 0.12);
-      padding: 2px 8px;
-      border-radius: 4px;
-      border: none;
-      display: none; /* activated in collapsible view */
-      font-family: var(--font-ui);
+      font-size: 0.75rem;
       font-weight: 600;
+      color: #786b5e;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0.15rem 0;
+      margin-bottom: 0.35rem;
     }
 
-    .trans-toggle-pill:hover {
-      background: rgba(140, 122, 107, 0.25);
+    .trans-collapse-toggle:hover {
+      color: var(--color-navy);
     }
 
-    /* Five-Lens Highlight Mark Styles */
+    /* ==========================================================================
+       5. Five-Lens Highlight Mark Styles & KaTeX Fix
+       ========================================================================== */
     mark.hl {
       background: transparent;
       border-bottom-width: 2px;
@@ -640,7 +612,7 @@
       color: var(--lens-method-text);
     }
 
-    /* Hover Micro-Badge Tooltip */
+    /* Micro-Badge Tooltip for Inline Marks */
     mark.hl::after {
       content: attr(data-label);
       position: absolute;
@@ -668,12 +640,73 @@
       transform: translateX(-50%) translateY(0);
     }
 
+    /* Bugfix: Block Formula KaTeX (.katex-display) nested in mark.hl */
+    mark.hl:has(.katex-display),
+    mark.hl.hl-block {
+      display: block;
+      padding: 0.75rem 1.25rem;
+      margin: 0.85rem 0;
+      border-radius: 6px;
+      border-bottom: none !important;
+      border-left-width: 4px;
+      border-left-style: solid;
+      position: relative;
+    }
+
+    mark.hl-method:has(.katex-display),
+    mark.hl-method.hl-block {
+      background-color: rgba(243, 232, 255, 0.55);
+      border-left-color: var(--lens-method-border);
+    }
+
+    mark.hl-thesis:has(.katex-display),
+    mark.hl-thesis.hl-block {
+      background-color: rgba(254, 243, 199, 0.55);
+      border-left-color: var(--lens-thesis-border);
+    }
+
+    mark.hl-concept:has(.katex-display),
+    mark.hl-concept.hl-block {
+      background-color: rgba(255, 228, 230, 0.55);
+      border-left-color: var(--lens-concept-border);
+    }
+
+    mark.hl-evidence:has(.katex-display),
+    mark.hl-evidence.hl-block {
+      background-color: rgba(224, 242, 254, 0.55);
+      border-left-color: var(--lens-evidence-border);
+    }
+
+    mark.hl-rebuttal:has(.katex-display),
+    mark.hl-rebuttal.hl-block {
+      background-color: rgba(220, 252, 231, 0.55);
+      border-left-color: var(--lens-rebuttal-border);
+    }
+
+    /* Tooltip positioned nicely at top-right for block formulas */
+    mark.hl:has(.katex-display)::after,
+    mark.hl.hl-block::after {
+      bottom: auto;
+      left: auto;
+      top: 6px;
+      right: 8px;
+      transform: none;
+      font-size: 0.65rem;
+      padding: 0.15rem 0.45rem;
+    }
+
+    mark.hl:has(.katex-display):hover::after,
+    mark.hl.hl-block:hover::after {
+      transform: none;
+    }
+
     /* Spotlight Filter Dimmed State */
     body.spotlight-active mark.hl:not(.spotlight-target) {
       opacity: 0.22;
       filter: grayscale(60%);
       background-color: rgba(226, 221, 211, 0.3) !important;
       border-bottom-color: #cbd5e1 !important;
+      border-left-color: #cbd5e1 !important;
       color: inherit !important;
     }
 
@@ -689,8 +722,8 @@
       display: none !important;
     }
 
-    body.mode-collapsible .trans-toggle-pill {
-      display: inline-block;
+    body.mode-collapsible .trans-collapse-toggle {
+      display: inline-flex;
     }
 
     body.mode-collapsible .trans-block:not(.expanded) .trans-content {
@@ -698,12 +731,12 @@
     }
 
     body.mode-collapsible .trans-block:not(.expanded) {
-      padding: 0.5rem 0.85rem;
+      padding: 0.55rem 0.95rem;
       background-color: #f7f5ef;
     }
 
     /* ==========================================================================
-       Right Cell: Chinese Commentary Card (.annotation-card)
+       6. Right Cell: Commentary Card (.annotation-card)
        ========================================================================== */
     .para-right {
       position: relative;
@@ -724,7 +757,6 @@
       transform: translateY(-2px);
     }
 
-    /* Accent color mapping based on dominant function */
     .annotation-card[data-dominant="thesis"] { border-left-color: var(--lens-thesis-border); }
     .annotation-card[data-dominant="concept"] { border-left-color: var(--lens-concept-border); }
     .annotation-card[data-dominant="evidence"] { border-left-color: var(--lens-evidence-border); }
@@ -745,8 +777,7 @@
       gap: 0.45rem;
       font-size: 0.75rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       color: var(--color-text-muted);
       margin-bottom: 0.4rem;
     }
@@ -761,8 +792,7 @@
     .func-capsule {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      padding: 0.3rem 0.75rem;
+      padding: 0.28rem 0.75rem;
       border-radius: 9999px;
       font-size: 0.8rem;
       font-weight: 600;
@@ -788,7 +818,7 @@
       border: 1px solid #f0eeea;
     }
 
-    /* Tier 3: Argus Gaze (Technique & Vulnerability) */
+    /* Tier 3: Argus Gaze */
     .argus-gaze-box {
       background: var(--color-paper-subtle);
       border: 1px solid #e7e2d7;
@@ -822,7 +852,7 @@
     .gaze-vulnerability .gaze-text { color: #374151; }
 
     /* ==========================================================================
-       Module 4: Bottom Synthesis Dashboard (.synthesis-dashboard)
+       7. Bottom Synthesis Dashboard (.synthesis-dashboard)
        ========================================================================== */
     .synthesis-dashboard {
       background: #ffffff;
@@ -873,8 +903,7 @@
     .sub-section-title {
       font-size: 0.95rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       color: #64748b;
       margin-bottom: 1.25rem;
       display: flex;
@@ -954,8 +983,7 @@
     .thesis-callout-label {
       font-size: 0.78rem;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       color: #92400e;
       margin-bottom: 0.6rem;
     }
@@ -1014,12 +1042,12 @@
     }
 
     /* ==========================================================================
-       Footer
+       8. Footer
        ========================================================================== */
     .argus-footer {
       background: var(--color-navy);
       color: #94a3b8;
-      padding: 2.5rem 2rem;
+      padding: 2.25rem 2rem;
       text-align: center;
       font-size: 0.82rem;
       border-top: 1px solid #1e3352;
@@ -1061,10 +1089,14 @@
       .paper-container {
         padding: 0 1rem;
       }
-      .argus-header {
-        padding: 1rem;
+      .argus-masthead {
+        padding: 1.25rem 1rem;
       }
-      .header-controls {
+      .paper-title {
+        font-size: 1.5rem;
+      }
+      .sticky-toolbar {
+        padding: 0.45rem 1rem;
         flex-direction: column;
         align-items: flex-start;
       }
@@ -1078,9 +1110,8 @@
 
     @media print {
       #progress-container,
-      .header-controls,
-      .sticky-nav-wrapper,
-      .trans-toggle-pill {
+      .sticky-toolbar-wrapper,
+      .trans-collapse-toggle {
         display: none !important;
       }
       .para-row {
@@ -1101,95 +1132,81 @@
     <div id="progress-bar"></div>
   </div>
 
-  <!-- Header & Brand Navigation -->
-  <header class="argus-header">
-    <div class="header-top">
-      <div class="brand-group">
-        <!-- Argus Minimalist Geometric Eye Logo SVG -->
-        <svg class="argus-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="50" r="46" stroke="#c59b27" stroke-width="2.5" stroke-dasharray="4 2" opacity="0.6"/>
-          <!-- Outer Eye Almond Contour -->
-          <path d="M12 50 C26 24 74 24 88 50 C74 76 26 76 12 50 Z" stroke="#ffffff" stroke-width="4.5" stroke-linejoin="round" fill="none"/>
-          <!-- Iris Ring -->
-          <circle cx="50" cy="50" r="19" stroke="#60a5fa" stroke-width="3" fill="#112444"/>
-          <!-- Argus Pupil Core -->
-          <circle cx="50" cy="50" r="8" fill="#ffd875"/>
-          <!-- Micro-Vision Rays (Panoptes Eyes) -->
-          <circle cx="32" cy="42" r="2.5" fill="#f43f5e"/>
-          <circle cx="68" cy="42" r="2.5" fill="#38bdf8"/>
-          <circle cx="50" cy="27" r="2.5" fill="#4ade80"/>
-          <circle cx="50" cy="73" r="2.5" fill="#c084fc"/>
-        </svg>
-        <div class="brand-meta">
-          <div class="brand-title">
-            ARGUS PAPER READER
-            <span class="brand-tag">Panoptes v1.0</span>
-          </div>
-          <div class="brand-subtitle">阿耳戈斯学术论文双栏双语逻辑精读器</div>
+  <!-- 1. Top Journal Masthead -->
+  <header class="argus-masthead">
+    <div class="masthead-inner">
+      <!-- Eyebrow: Logo + Brand Monogram + Links -->
+      <div class="masthead-eyebrow">
+        <div class="eyebrow-brand">
+          <svg class="argus-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="#c59b27" stroke-width="3" stroke-dasharray="4 2" opacity="0.6"/>
+            <path d="M12 50 C26 24 74 24 88 50 C74 76 26 76 12 50 Z" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" fill="none"/>
+            <circle cx="50" cy="50" r="19" stroke="#60a5fa" stroke-width="3.5" fill="#112444"/>
+            <circle cx="50" cy="50" r="8" fill="#ffd875"/>
+            <circle cx="32" cy="42" r="2.5" fill="#f43f5e"/>
+            <circle cx="68" cy="42" r="2.5" fill="#38bdf8"/>
+            <circle cx="50" cy="27" r="2.5" fill="#4ade80"/>
+            <circle cx="50" cy="73" r="2.5" fill="#c084fc"/>
+          </svg>
+          <span class="eyebrow-text">ARGUS &bull; ACADEMIC LOGIC READER</span>
+        </div>
+        <div class="eyebrow-links">
+          <span>DOI: <a href="https://doi.org/10.1257/aer.91.5.1369" target="_blank" rel="noopener">10.1257/aer.91.5.1369</a></span> &bull; <a href="https://doi.org/10.1257/aer.91.5.1369" target="_blank" rel="noopener">Paper Link &nearr;</a>
         </div>
       </div>
 
-      <div class="paper-info">
+      <div class="masthead-divider"></div>
+
+      <!-- Masthead Main: Author & Paper Title Focus -->
+      <div class="masthead-main">
         <h1 class="paper-title">The Colonial Origins of Comparative Development: An Empirical Investigation</h1>
         <div class="paper-meta-row">
-          <div class="paper-meta-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="paper-meta-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             <span>Daron Acemoglu, Simon Johnson, and James A. Robinson</span>
-          </div>
-          <div class="paper-meta-item">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </span>
+          <span class="meta-separator">&bull;</span>
+          <span class="paper-meta-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             <span>2001 · American Economic Review, Vol. 91, No. 5, pp. 1369-1401</span>
-          </div>
-          <div class="paper-meta-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span>DOI: 10.1257/aer.91.5.1369</span></div><div class="paper-meta-item"><a href="https://doi.org/10.1257/aer.91.5.1369" target="_blank" style="color:inherit;text-decoration:underline;">[Paper Link]</a></div>
+          </span>
         </div>
-      </div>
-    </div>
-
-    <!-- Header Controls: Lens Filters + View Switcher -->
-    <div class="header-controls">
-      <div class="filter-group">
-        <span class="filter-label">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-          五维透镜 Spotlight:
-        </span>
-        <button class="lens-btn active" data-dim="all" title="显示全部标注">
-          全部
-        </button>
-        <button class="lens-btn" data-dim="thesis" title="聚焦核心论点 (Thesis)">
-          <span class="lens-dot"></span>核心论点
-        </button>
-        <button class="lens-btn" data-dim="concept" title="聚焦关键概念 (Concept)">
-          <span class="lens-dot"></span>关键概念
-        </button>
-        <button class="lens-btn" data-dim="evidence" title="聚焦实证证据 (Evidence)">
-          <span class="lens-dot"></span>实证证据
-        </button>
-        <button class="lens-btn" data-dim="rebuttal" title="聚焦让步反驳 (Rebuttal)">
-          <span class="lens-dot"></span>让步反驳
-        </button>
-        <button class="lens-btn" data-dim="method" title="聚焦方法论 (Methodology)">
-          <span class="lens-dot"></span>方法论
-        </button>
-      </div>
-
-      <div class="view-switcher">
-        <button class="view-btn active" data-mode="bilingual" title="英中完整双语对照">双语对照</button>
-        <button class="view-btn" data-mode="en-only" title="仅阅读英文正文与批注">仅看英文</button>
-        <button class="view-btn" data-mode="collapsible" title="折叠中文译文，支持逐段展开">折叠译文</button>
       </div>
     </div>
   </header>
 
-  <!-- Sticky Section Anchor Nav -->
-  <div class="sticky-nav-wrapper">
-    <nav class="sticky-nav" id="sticky-nav">
-      <a class="nav-anchor-item" href="#sec-intro"><span class="sec-idx">01.</span>I. Introduction & Theoretical Motivation</a>
+  <!-- 2. Unified Sticky Glass Toolbar (Section Nav + Lens + View Controls) -->
+  <div class="sticky-toolbar-wrapper">
+    <div class="sticky-toolbar">
+      <!-- Left: Section Anchor Navigation -->
+      <nav class="toolbar-sections" id="toolbar-sections">
+        <a class="nav-anchor-item" href="#sec-intro"><span class="sec-idx">01.</span>I. Introduction & Theoretical Motivation</a>
       <a class="nav-anchor-item" href="#sec-method-results"><span class="sec-idx">02.</span>II. Econometric Methodology & Empirical Results</a>
-      <a class="nav-anchor-item" href="#sec-synthesis"><span class="sec-idx">✦</span>论证总览 Dashboard</a>
-    </nav>
+      <a class="nav-anchor-item" href="#sec-synthesis"><span class="sec-idx">✦</span>论证总览</a>
+      </nav>
+
+      <!-- Right: Five-Lens Filter & View Switcher -->
+      <div class="toolbar-controls">
+        <div class="filter-group">
+          <span class="filter-label">透镜:</span>
+          <button class="lens-btn active" data-dim="all" title="显示全部标注">全部</button>
+          <button class="lens-btn" data-dim="thesis" title="聚焦核心论点 (Thesis)"><span class="lens-dot"></span>论点</button>
+          <button class="lens-btn" data-dim="concept" title="聚焦关键概念 (Concept)"><span class="lens-dot"></span>概念</button>
+          <button class="lens-btn" data-dim="evidence" title="聚焦实证证据 (Evidence)"><span class="lens-dot"></span>证据</button>
+          <button class="lens-btn" data-dim="rebuttal" title="聚焦让步反驳 (Rebuttal)"><span class="lens-dot"></span>反驳</button>
+          <button class="lens-btn" data-dim="method" title="聚焦方法论 (Methodology)"><span class="lens-dot"></span>方法</button>
+        </div>
+
+        <div class="view-switcher">
+          <button class="view-btn active" data-mode="bilingual" title="英中完整双语对照">双语对照</button>
+          <button class="view-btn" data-mode="en-only" title="仅阅读英文正文与批注">仅看英文</button>
+          <button class="view-btn" data-mode="collapsible" title="折叠中文译文，支持逐段展开">折叠译文</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Main Content Grid -->
+  <!-- 3. Main Content Grid -->
   <main class="paper-container">
     
     <section class="section-block" id="sec-intro">
@@ -1206,10 +1223,7 @@
           <div class="en-content">What are the fundamental causes of the large differences in income per capita across countries? While there is little doubt that physical capital, human capital, and technology are immediate determinants of economic prosperity, we argue that <mark class="hl hl-thesis" data-dim="thesis" data-label="核心因果假说">differences in institutional quality—specifically, the degree of property rights enforcement and protection against expropriation risk—are the primary fundamental cause of comparative development</mark>. However, estimating the impact of institutions on economic performance is notoriously difficult because economies with high GDP per capita may simply afford better institutions, generating acute <mark class="hl hl-concept" data-dim="concept" data-label="内生性概念">simultaneity bias and reverse causality</mark>. To overcome this fundamental identification challenge, we propose a novel theory exploiting <mark class="hl hl-method" data-dim="method" data-label="外生工具变量">historical differences in European settler mortality rates as an exogenous instrument</mark> for contemporary institutional quality across former colonies.</div>
           <hr class="para-divider">
           <div class="trans-block">
-            <div class="trans-header">
-              <span>中文学术意译 (Top Journal Style)</span>
-              <button class="trans-toggle-pill" type="button">展开译文</button>
-            </div>
+            <button class="trans-collapse-toggle" type="button"><span class="toggle-arrow">▸</span> 展开中文译文</button>
             <div class="trans-content">究竟何为导致跨国人均收入巨大差距的根本动因？尽管物质资本、人力资本与技术进步无疑是经济繁荣的直接决定因素，但本文主张，制度质量的异质性——特别是产权界定清晰度与防范政府掠夺风险的保护机制——构成了决定比较发展差异的根本原因。然而，评估制度对经济绩效的因果影响面临显著的识别困境：富裕国家往往有能力负担更为完善的制度设计，从而引发严重的同步性偏差与反向因果难题。为破解这一内生性瓶颈，本文提出一种基于历史维度的全新理论，将欧洲早期殖民者在外派定居过程中的死亡率差异，作为测度当代殖民地制度质量的外生工具变量。</div>
           </div>
         </div>
@@ -1243,20 +1257,20 @@
             <div class="card-tier">
               <div class="tier-header">
                 <svg class="tier-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                ③ Argus Gaze（论证技巧与潜在漏洞）
+                ③ 论证解剖 (Argus Gaze)
               </div>
               <div class="argus-gaze-box">
                 <div class="gaze-subitem gaze-technique">
                   <div class="gaze-subhead">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                    论证技巧 / Rhetoric & Design
+                    ✦ 论证设计与修辞
                   </div>
                   <div class="gaze-text">开门见山将增长核算要素（资本、技术）降级为‘直接决定因素’（Proximate Causes），巧妙为‘制度作为根本起因’（Fundamental Cause）腾挪论据空间，并以极具穿透力的修辞引出工具变量的历史脉络。</div>
                 </div>
                 <div class="gaze-subitem gaze-vulnerability">
                   <div class="gaze-subhead">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    潜在漏洞 / Reviewer Vulnerability
+                    ⚑ 潜在漏洞与审稿质疑
                   </div>
                   <div class="gaze-text">反向因果与遗漏变量的批评在此完全成立；将制度粗略等同于‘防范掠夺风险指数’，在概念上可能混淆了产权制度（Property Rights Institutions）与签约契约制度（Contracting Institutions）的细微差别。</div>
                 </div>
@@ -1273,10 +1287,7 @@
           <div class="en-content">Our causal chain rests on three core institutional linkages. First, in environments where Europeans faced relatively low mortality risks (such as the United States, Canada, Australia, and New Zealand), they migrated in large numbers and created <mark class="hl hl-concept" data-dim="concept" data-label="拓殖制度定义">'neo-Europes' characterized by inclusive institutions</mark> that placed checks on government power and enforced the rule of law. Conversely, in regions with hostile disease environments where settlement was infeasible (such as the Congo, Nigeria, or the Caribbean), Europeans established <mark class="hl hl-concept" data-dim="concept" data-label="掠夺性制度定义">'extractive states' whose main objective was to transfer resources to the metropole</mark> without introducing civil liberties or property protections. Second, colonial institutional architectures exhibit formidable <mark class="hl hl-thesis" data-dim="thesis" data-label="制度路径依赖假说">institutional persistence</mark>, lasting well beyond decolonization into the modern era because post-independence elites inherited and repurposed extractive machinery to enrich themselves. Consequently, historical settler mortality influences current economic prosperity almost exclusively through its persistent imprint on institutional development.</div>
           <hr class="para-divider">
           <div class="trans-block">
-            <div class="trans-header">
-              <span>中文学术意译 (Top Journal Style)</span>
-              <button class="trans-toggle-pill" type="button">展开译文</button>
-            </div>
+            <button class="trans-collapse-toggle" type="button"><span class="toggle-arrow">▸</span> 展开中文译文</button>
             <div class="trans-content">本文所建构的因果链条立足于三重相互锁定的制度传导机制。首先，在早期欧洲殖民者面临极低死亡风险的温带定居区（如美国、加拿大、澳大利亚与新西兰），欧洲人实现了大规模移民拓殖，建立了以制约行政权力与保障法治为特征的‘新欧洲型包容性制度’；相反，在疟疾与黄热病肆虐的高危疾病环境区（如刚果、尼日利亚或加勒比群岛），定居根本无法实现，殖民者转而构建了‘掠夺型制度’，其唯一诉求在于将原产地自然资源最大限度榨取并转移至宗主国，而绝不赋予当地社会以财产权与公民自由。其次，殖民时期的制度架构具有极其坚韧的路径依赖特征，在非殖民化浪潮后依然长期存续，原因在于独立后的本土官僚精英直接继承了这套掠夺机器并用以攫取租金。由此，历史上的定居者死亡率唯有通过其在制度演化中的历史沉淀，方能持续投影于当代的经济繁荣。</div>
           </div>
         </div>
@@ -1310,20 +1321,20 @@
             <div class="card-tier">
               <div class="tier-header">
                 <svg class="tier-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                ③ Argus Gaze（论证技巧与潜在漏洞）
+                ③ 论证解剖 (Argus Gaze)
               </div>
               <div class="argus-gaze-box">
                 <div class="gaze-subitem gaze-technique">
                   <div class="gaze-subhead">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                    论证技巧 / Rhetoric & Design
+                    ✦ 论证设计与修辞
                   </div>
                   <div class="gaze-text">构造‘新欧洲型包容制度’与‘掠夺型制度’二元极化对立的概念棱镜，赋予抽象历史演化以极强的叙事张力；引入独立后精英阶层的‘租金攫取动机’，合理化了制度路径依赖在后殖民时代的微观基础。</div>
                 </div>
                 <div class="gaze-subitem gaze-vulnerability">
                   <div class="gaze-subhead">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    潜在漏洞 / Reviewer Vulnerability
+                    ⚑ 潜在漏洞与审稿质疑
                   </div>
                   <div class="gaze-text">关于制度刚性‘数百年不变’的假设过于决定论。它忽略了后殖民时代的工业化政策、冷战地缘博弈、宪政改革以及内战冲击可能带来的制度突变（Institutional Leapfrogging）。</div>
                 </div>
@@ -1351,10 +1362,7 @@
           <div class="en-content">To estimate the causal effect of institutions on economic performance, we formulate the structural econometric relationship using two-stage least squares (2SLS). The second-stage equation relates current income per capita to institutional protection: <mark class="hl hl-method" data-dim="method" data-label="第二阶段回归方程">$$\log y_i = \mu + \alpha R_i + \mathbf{X}_i' \gamma + \varepsilon_i$$</mark> where $y_i$ is GDP per capita in 1995 for country $i$, $R_i$ is contemporary institutional quality measured by the Political Risk Services index of protection against expropriation risk between 1985 and 1995, and $\mathbf{X}_i$ is a vector of covariates including continent dummies, absolute latitude, and legal origins. In the first-stage regression, we instrument current institutions using the logarithm of historical European settler mortality: <mark class="hl hl-method" data-dim="method" data-label="第一阶段工具变量方程">$$R_i = \zeta + \beta \log M_i + \mathbf{X}_i' \delta + v_i$$</mark> where $M_i$ represents settler mortality rates per 1,000 per annum based on nineteenth-century military records. For $\log M_i$ to serve as a valid instrumental variable, it must satisfy both <mark class="hl hl-concept" data-dim="concept" data-label="相关性条件">relevance ($\beta \neq 0$)</mark> and the critical <mark class="hl hl-rebuttal" data-dim="rebuttal" data-label="排他性约束条件">exclusion restriction ($E[\log M_i \cdot \varepsilon_i] = 0$)</mark>, meaning mortality had no direct impact on modern prosperity other than through institutional persistence.</div>
           <hr class="para-divider">
           <div class="trans-block">
-            <div class="trans-header">
-              <span>中文学术意译 (Top Journal Style)</span>
-              <button class="trans-toggle-pill" type="button">展开译文</button>
-            </div>
+            <button class="trans-collapse-toggle" type="button"><span class="toggle-arrow">▸</span> 展开中文译文</button>
             <div class="trans-content">为精确测度制度对经济绩效的净因果效应，本文采用两阶段最小二乘法（2SLS）构建结构计量模型。第二阶段方程将当代人均收入与产权制度保护程度建立如下映射：$$\log y_i = \mu + \alpha R_i + \mathbf{X}_i' \gamma + \varepsilon_i$$ 其中 $y_i$ 表示样本国 $i$ 在 1995 年的对数人均实际国内生产总值；$R_i$ 为当代制度质量的代理指标，具体采用政治风险服务集团（PRS）评估的 1985 至 1995 年间‘防范政府征收风险指数’；$\mathbf{X}_i$ 为一组基准控制变量向量，涵盖洲际虚拟变量、绝对纬度以及法系渊源。在第一阶段回归中，本文引入 19 世纪欧洲早期定居者死亡率对数 $\log M_i$ 作为核心工具变量：$$R_i = \zeta + \beta \log M_i + \mathbf{X}_i' \delta + v_i$$ 该历史死亡率数据来源于驻防欧洲陆军与海军官兵每千人年化死亡记录。为确保该工具变量在计量上严格成立，$\log M_i$ 必须同时满足相关性假设（即 $\beta \neq 0$）与至关重要的排他性约束条件（$E[\log M_i \cdot \varepsilon_i] = 0$），即殖民者死亡率除通过塑造制度传承外，不得对当代经济产出产生任何未被控制的直接渠道影响。</div>
           </div>
         </div>
@@ -1388,20 +1396,20 @@
             <div class="card-tier">
               <div class="tier-header">
                 <svg class="tier-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                ③ Argus Gaze（论证技巧与潜在漏洞）
+                ③ 论证解剖 (Argus Gaze)
               </div>
               <div class="argus-gaze-box">
                 <div class="gaze-subitem gaze-technique">
                   <div class="gaze-subhead">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                    论证技巧 / Rhetoric & Design
+                    ✦ 论证设计与修辞
                   </div>
                   <div class="gaze-text">借用 19 世纪欧洲军队档案中标准化、可比性极强的驻防死亡率数据，成功规避了由于主观调查偏差导致的工具变量度量误差，赋予历史计量极高的客观性与复现性。</div>
                 </div>
                 <div class="gaze-subitem gaze-vulnerability">
                   <div class="gaze-subhead">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    潜在漏洞 / Reviewer Vulnerability
+                    ⚑ 潜在漏洞与审稿质疑
                   </div>
                   <div class="gaze-text">排他性约束假定（Exclusion Restriction）极其脆弱：早期导致高死亡率的致病生态（如恶性疟疾和黄热病）在经历两百年后，其病原体环境是否仍会通过损害当代劳动力健康与人力资本，从而直接压低当期人均 GDP？这构成了该设计最大且难以闭合的潜在违例渠道。</div>
                 </div>
@@ -1418,10 +1426,7 @@
           <div class="en-content">The 2SLS estimates uncover a strikingly powerful causal impact of institutions. In the first-stage regression, historical settler mortality is strongly and negatively correlated with modern institutional quality: <mark class="hl hl-evidence" data-dim="evidence" data-label="第一阶段显著性">$\hat{\beta} = -0.61$ with a standard error of $0.13$ ($t = -4.69$, $F > 20$)</mark>, ruling out weak-instrument concerns. In the structural second-stage, the estimated coefficient on protection against expropriation risk is <mark class="hl hl-evidence" data-dim="evidence" data-label="2SLS因果效应量">$\hat{\alpha} = 0.94$ (standard error $0.16$, $p < 0.001$)</mark>, indicating that a one-standard-deviation improvement in institutional security multiplies income per capita by nearly fourfold. <mark class="hl hl-rebuttal" data-dim="rebuttal" data-label="反驳地理禀赋假说">When controlling for latitude, temperature, and malaria ecology directly in the second stage, the coefficient $\hat{\alpha}$ remains quantitatively stable and statistically indistinguishable from $0.94$, whereas geographical covariates lose explanatory power</mark>. Furthermore, controlling for British colonial heritage and religion does not attenuate this coefficient, confirming that our findings are not artifacts of omitted cultural or imperial traditions.</div>
           <hr class="para-divider">
           <div class="trans-block">
-            <div class="trans-header">
-              <span>中文学术意译 (Top Journal Style)</span>
-              <button class="trans-toggle-pill" type="button">展开译文</button>
-            </div>
+            <button class="trans-collapse-toggle" type="button"><span class="toggle-arrow">▸</span> 展开中文译文</button>
             <div class="trans-content">2SLS 结构估计呈现出制度对经济繁荣极为深远的因果决定作用。第一阶段回归显示，历史定居者死亡率与当代制度质量呈现出极度显著的负向关系统计特征：估计系数 $\hat{\beta} = -0.61$（标准误 $0.13$，$t = -4.69$，$F$ 统计量显著突破 20 的经验安全阈值），有力排除了弱工具变量的疑虑。第二阶段结构方程中，防范征收风险指数对人均收入的估计弹性系数高达 $\hat{\alpha} = 0.94$（标准误 $0.16$，$p < 0.001$）；这表明，制度保护程度每提升一个样本标准差，该国人均 GDP 理论上将实现接近四倍的巨大跃升。进一步地，当在第二阶段中直接控制绝对纬度、气候温度与疟疾流行率等地理生态禀赋时，制度效应 $\hat{\alpha}$ 在数值大小与显著性上均保持高度稳健，而传统的地理决定论变量则彻底丧失了统计解释力。此外，控制大英帝国殖民从属虚拟变量及宗教构成后基准结论依然如故，确证该因果效应并非由遗漏的宗主国文化惯性所伪造。</div>
           </div>
         </div>
@@ -1455,20 +1460,20 @@
             <div class="card-tier">
               <div class="tier-header">
                 <svg class="tier-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                ③ Argus Gaze（论证技巧与潜在漏洞）
+                ③ 论证解剖 (Argus Gaze)
               </div>
               <div class="argus-gaze-box">
                 <div class="gaze-subitem gaze-technique">
                   <div class="gaze-subhead">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                    论证技巧 / Rhetoric & Design
+                    ✦ 论证设计与修辞
                   </div>
                   <div class="gaze-text">通过在第二阶段回归中‘正面吸纳并降维’地理学派（萨克斯团队）的核心变量（如疟疾生态指数），使竞争假说在受控后丧失显著性，展现了极具压制力与说服力的反驳策略（Pre-emptive Rebuttal）。</div>
                 </div>
                 <div class="gaze-subitem gaze-vulnerability">
                   <div class="gaze-subhead">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    潜在漏洞 / Reviewer Vulnerability
+                    ⚑ 潜在漏洞与审稿质疑
                   </div>
                   <div class="gaze-text">第一阶段强相关与第二阶段统计显著并不能在数学上证明排他性约束完全满足；样本量仅涵盖 64 个前殖民地国家，较小的样本容量使对高维控制变量与交互项的回归敏感度偏高；后来的学者（如 Albouy, 2012）指出，死亡率数据源在不同地区间存在拼接与非同质推断问题。</div>
                 </div>
@@ -1487,8 +1492,8 @@
       
       <div class="dashboard-header">
         <div class="dashboard-title-group">
-          <h2 class="dashboard-title">论证结构与批判性复盘 (Synthesis Dashboard)</h2>
-          <span class="dashboard-badge">ARGUS PANOPTES REVIEW</span>
+          <h2 class="dashboard-title">论证结构与全局复盘 (Synthesis Dashboard)</h2>
+          <span class="dashboard-badge">ARGUS REVIEW</span>
         </div>
       </div>
 
@@ -1496,7 +1501,7 @@
       <div class="skeleton-section">
         <div class="sub-section-title">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          全文逻辑骨架流 (Logic Pipeline)
+          全文逻辑骨架
         </div>
         <div class="skeleton-pipeline">
           
@@ -1542,7 +1547,7 @@
       <!-- One-Sentence Core Thesis Callout -->
       <div class="thesis-callout-card">
         <div class="thesis-callout-quote-icon">&ldquo;</div>
-        <div class="thesis-callout-label">作者核心主张一句话版本 / One-Sentence Core Thesis</div>
+        <div class="thesis-callout-label">核心主张（Core Thesis）</div>
         <div class="thesis-callout-text">跨国经济繁荣的根本差异源于长期产权制度的质量差距；欧洲早期定居者死亡率决定的初始殖民策略（包容性定居 vs. 掠夺性榨取）通过深沉的制度路径依赖，至今仍在深刻形塑全球发展版图。</div>
       </div>
 
@@ -1551,7 +1556,7 @@
         <div class="critique-card card-strength">
           <div class="critique-title-row">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-            <span>论证最强处 / Core Methodological Strength</span>
+            <span>核心方法论优势</span>
           </div>
           <div class="critique-body">
             构筑了实证经济学史诗级的‘历史自然实验’因果识别闭环。巧妙地将 19 世纪欧洲陆海军官兵客观死亡记录跨时空连接至当代制度演化，首次为长达半个世纪悬而未决的‘制度是否真正因果导致增长’提供了兼具历史叙事张力与现代计量严密性的可信证据。
@@ -1561,7 +1566,7 @@
         <div class="critique-card card-achilles">
           <div class="critique-title-row">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <span>阿喀琉斯之踵 / Critical Achilles' Heel</span>
+            <span>阿喀琉斯之踵（识别软肋）</span>
           </div>
           <div class="critique-body">
             排他性约束假定（Exclusion Restriction）在理论与实证上均难以完全闭合。早期造成高死亡率的热带致病生态（恶性疟疾和黄热病）在历史长河中并未消亡，极可能直接削弱了当代本土居民的生理健康与全要素生产率；此外，历史死亡率数据源存在地区拼接与推断误差（Albouy, 2012），且 64 个样本国的容量限制限制了异质性分析的统计效能。
@@ -1575,16 +1580,16 @@
   <!-- Footer -->
   <footer class="argus-footer">
     <div class="footer-main">
-      Generated by <strong>Argus Paper Reader</strong> &mdash; All-Seeing Academic Companion
+      Generated by <strong>Argus Academic Logic Reader</strong> &mdash; All-Seeing Academic Companion
     </div>
     <div class="footer-sub">
       Powered by Argus Five-Lens Analysis System &bull; Compatible with Google Antigravity & Claude Code
     </div>
   </footer>
 
-  <!-- Embedded Raw Data JSON (Optional) -->
+  <!-- Embedded Raw Data JSON -->
   <script id="argus-raw-data" type="application/json">
-    {
+{
   "meta": {
     "title": "The Colonial Origins of Comparative Development: An Empirical Investigation",
     "authors": "Daron Acemoglu, Simon Johnson, and James A. Robinson",
@@ -1700,16 +1705,15 @@
       }
     ],
     "strength": {
-      "title": "论证最强处 / Core Methodological Strength",
+      "title": "核心方法论优势",
       "content": "构筑了实证经济学史诗级的‘历史自然实验’因果识别闭环。巧妙地将 19 世纪欧洲陆海军官兵客观死亡记录跨时空连接至当代制度演化，首次为长达半个世纪悬而未决的‘制度是否真正因果导致增长’提供了兼具历史叙事张力与现代计量严密性的可信证据。"
     },
     "achilles_heel": {
-      "title": "阿喀琉斯之踵 / Critical Achilles' Heel",
+      "title": "阿喀琉斯之踵（识别软肋）",
       "content": "排他性约束假定（Exclusion Restriction）在理论与实证上均难以完全闭合。早期造成高死亡率的热带致病生态（恶性疟疾和黄热病）在历史长河中并未消亡，极可能直接削弱了当代本土居民的生理健康与全要素生产率；此外，历史死亡率数据源存在地区拼接与推断误差（Albouy, 2012），且 64 个样本国的容量限制限制了异质性分析的统计效能。"
     }
   }
 }
-    {}
   </script>
 
   <!-- Client-side Interactive Logic -->
@@ -1727,6 +1731,13 @@
           throwOnError: false
         });
       }
+
+      // 1.1 KaTeX Display Formula Detection within Marks
+      document.querySelectorAll('mark.hl').forEach(m => {
+        if (m.querySelector('.katex-display') || m.textContent.includes('$$')) {
+          m.classList.add('hl-block');
+        }
+      });
 
       // 2. Reading Progress Bar
       const progressBar = document.getElementById('progress-bar');
@@ -1749,7 +1760,6 @@
         btn.addEventListener('click', () => {
           const dim = btn.getAttribute('data-dim');
           if (dim === currentSpotlight && dim !== 'all') {
-            // Toggle off back to all
             setSpotlight('all');
           } else {
             setSpotlight(dim);
@@ -1803,13 +1813,16 @@
       });
 
       // 5. Collapsible Translation Single Paragraph Toggle
-      document.querySelectorAll('.trans-toggle-pill').forEach(pill => {
-        pill.addEventListener('click', (e) => {
+      document.querySelectorAll('.trans-collapse-toggle').forEach(btn => {
+        btn.addEventListener('click', (e) => {
           e.stopPropagation();
-          const transBlock = pill.closest('.trans-block');
+          const transBlock = btn.closest('.trans-block');
           if (transBlock) {
             transBlock.classList.toggle('expanded');
-            pill.textContent = transBlock.classList.contains('expanded') ? '折叠' : '展开译文';
+            const isExpanded = transBlock.classList.contains('expanded');
+            btn.innerHTML = isExpanded 
+              ? '<span class="toggle-arrow">▾</span> 收起中文译文' 
+              : '<span class="toggle-arrow">▸</span> 展开中文译文';
           }
         });
       });
