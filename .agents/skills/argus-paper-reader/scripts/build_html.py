@@ -378,7 +378,8 @@ def build_argus_html(data_path: Path, output_path: Path, template_path: Path = N
     nav_html = render_sections_nav(sections, synthesis)
     body_html = render_body_content(sections)
     synthesis_html = render_synthesis_dashboard(synthesis)
-    raw_json_str = json.dumps(data, ensure_ascii=False, indent=2)
+    # Escape '</' inside embedded JSON to prevent premature </script> termination (XSS hardening)
+    raw_json_str = json.dumps(data, ensure_ascii=False, indent=2).replace("</", "<\\/")
 
     # Perform placeholder replacements
     html = template_str
