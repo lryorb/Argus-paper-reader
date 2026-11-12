@@ -100,12 +100,12 @@
 
 <a id="why-argus"></a>
 
-## ✨ Why Argus-paper-reader? | 为什么需要阿耳戈斯精读器？
+## ✨ Why Argus-paper-reader?
 
 > In Greek mythology, **Argus Panoptes** was the hundred-eyed giant — closing only a few eyes to sleep while keeping the rest open in ceaseless vigilance.
 > **Argus-paper-reader** brings that same relentless scrutiny to academic reading: instead of reducing a paper to a flat, generic summary, it projects original prose, publication-grade Chinese translation, structural argument lenses, and referee-level critique onto a unified spatial canvas.
 
-| Dimension / 维度 | Traditional PDF + Generic AI Summary<br/>传统 PDF 阅读 + 普通 AI 摘要 | Argus-paper-reader<br/>阿耳戈斯双栏双语空间精读器 |
+| Dimension / 维度 | Traditional PDF + Generic AI Summary<br/>传统 PDF 阅读 + 普通 AI 摘要 | Argus-paper-reader<br/> |
 | :--- | :--- | :--- |
 | **Alignment / 段落对齐** | Flat wall of summary bullets detached from original sentences<br/>摘要与原文割裂，难以定位论证出处 | **1:1 `.para-row` CSS Grid**: Every paragraph pairs verbatim English, academic Chinese, and structural critique side-by-side<br/>逐自然段空间网格锁死，一比一对照 |
 | **Highlighting / 高亮过滤** | Monochrome yellow highlight clutter with no semantic filtering<br/>单色荧光笔涂鸦，无法按逻辑维度筛选 | **Argus Five-Lens Cross-Column Spotlight**: Instant filtering &amp; dimming across 5 epistemic dimensions via buttons or keys `0–5`<br/>五维透镜跨栏联动 + 键盘 `0–5` 瞬时聚光 |
@@ -117,7 +117,7 @@
 
 <a id="five-lens-system"></a>
 
-## 👁️ The Argus Five-Lens System | 阿耳戈斯五维透镜体系
+## 👁️ The Argus Five-Lens System | 五维透镜体系
 
 Press number keys **`0`–`5`** or click the glass toolbar pills to illuminate one analytical dimension across **both** the English text (`<mark>`) and the right-hand referee cards (`data-dominant`):
 
