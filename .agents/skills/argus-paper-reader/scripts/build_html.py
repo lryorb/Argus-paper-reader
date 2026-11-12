@@ -12,10 +12,62 @@ Usage:
 """
 
 import os
+import re
 import sys
 import json
 import argparse
 from pathlib import Path
+
+
+def normalize_zh_punctuation(text: str) -> str:
+    """
+    Normalizes Chinese single quotes (‘...’ and CJK-wrapped '...') into
+    scholarly corner brackets 「...」 while preserving English apostrophes and math primes.
+    """
+    if not text or not isinstance(text, str):
+        return text or ""
+    # Replace curly single quote pairs ‘...’ with 「...」
+    text = re.sub(r"\u2018([^\u2019\n]+)\u2019", r"「\1」", text)
+    # Replace ASCII single quotes '...' when containing at least one CJK character
+    text = re.sub(r"'([^'\n]*[\u4e00-\u9fff][^'\n]*)'", r"「\1」", text)
+    return text
+
+
+def sanitize_chinese_fields(data: dict) -> dict:
+    """Applies Chinese punctuation normalization across zh, annotation, and synthesis fields."""
+    for sec in data.get("sections", []):
+        for p in sec.get("paragraphs", []):
+            if "zh" in p:
+                p["zh"] = normalize_zh_punctuation(p["zh"])
+            ann = p.get("annotation", {})
+            if "function" in ann:
+                ann["function"] = normalize_zh_punctuation(ann["function"])
+            if "logical_role" in ann:
+                ann["logical_role"] = normalize_zh_punctuation(ann["logical_role"])
+            gaze = ann.get("gaze", {})
+            if "technique" in gaze:
+                gaze["technique"] = normalize_zh_punctuation(gaze["technique"])
+            if "vulnerability" in gaze:
+                gaze["vulnerability"] = normalize_zh_punctuation(gaze["vulnerability"])
+
+    syn = data.get("synthesis", {})
+    if "core_thesis" in syn:
+        syn["core_thesis"] = normalize_zh_punctuation(syn["core_thesis"])
+    for node in syn.get("logic_skeleton", []):
+        if "step" in node:
+            node["step"] = normalize_zh_punctuation(node["step"])
+        if "title" in node:
+            node["title"] = normalize_zh_punctuation(node["title"])
+        if "desc" in node:
+            node["desc"] = normalize_zh_punctuation(node["desc"])
+    for key in ("strength", "achilles_heel"):
+        card = syn.get(key, {})
+        if "title" in card:
+            card["title"] = normalize_zh_punctuation(card["title"])
+        if "content" in card:
+            card["content"] = normalize_zh_punctuation(card["content"])
+
+    return data
 
 
 def escape_html(text: str) -> str:
@@ -274,6 +326,8 @@ def build_argus_html(data_path: Path, output_path: Path, template_path: Path = N
     print(f"[Argus] Loading data from: {data_path}")
     with open(data_path, "r", encoding="utf-8") as f:
         data = json.load(f)
+
+    data = sanitize_chinese_fields(data)
 
     meta = data.get("meta", {})
     title = meta.get("title", "Academic Paper Analysis")

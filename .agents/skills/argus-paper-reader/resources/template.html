@@ -259,6 +259,21 @@
       -ms-overflow-style: none;
     }
 
+    @media (min-width: 961px) {
+      .sticky-toolbar {
+        flex-wrap: nowrap;
+      }
+      .toolbar-sections {
+        flex: 1;
+        min-width: 0;
+        overflow-x: auto;
+      }
+      .toolbar-controls {
+        flex-shrink: 0;
+        flex-wrap: nowrap;
+      }
+    }
+
     .toolbar-sections::-webkit-scrollbar {
       display: none;
     }
@@ -442,6 +457,7 @@
 
     .section-block {
       margin-bottom: 3.5rem;
+      scroll-margin-top: 4.75rem;
     }
 
     .section-header {
@@ -478,6 +494,16 @@
       align-items: start;
       margin-bottom: 2.25rem;
       position: relative;
+      scroll-margin-top: 4.75rem;
+      transition: opacity 0.25s ease;
+    }
+
+    .para-row.row-dimmed {
+      opacity: 0.42;
+    }
+
+    .para-row.row-dimmed:hover {
+      opacity: 0.9;
     }
 
     /* Left Cell: English Original + Translation */
@@ -722,6 +748,15 @@
       display: none !important;
     }
 
+    body.mode-collapsible .para-divider {
+      display: none;
+    }
+
+    body.mode-collapsible .para-left:has(.trans-block.expanded) .para-divider,
+    body.mode-collapsible .para-left.has-expanded-trans .para-divider {
+      display: block;
+    }
+
     body.mode-collapsible .trans-collapse-toggle {
       display: inline-flex;
     }
@@ -731,8 +766,20 @@
     }
 
     body.mode-collapsible .trans-block:not(.expanded) {
-      padding: 0.55rem 0.95rem;
+      padding: 0.6rem 1rem;
+      margin-top: 1.15rem;
       background-color: #f7f5ef;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.15s ease;
+    }
+
+    body.mode-collapsible .trans-block:not(.expanded):hover {
+      background-color: #efe9dc;
+    }
+
+    body.mode-collapsible .trans-block:not(.expanded) .trans-collapse-toggle {
+      margin-bottom: 0;
     }
 
     /* ==========================================================================
@@ -749,7 +796,7 @@
       border-radius: 12px;
       padding: 1.4rem 1.5rem;
       box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
     }
 
     .annotation-card:hover {
@@ -762,6 +809,31 @@
     .annotation-card[data-dominant="evidence"] { border-left-color: var(--lens-evidence-border); }
     .annotation-card[data-dominant="rebuttal"] { border-left-color: var(--lens-rebuttal-border); }
     .annotation-card[data-dominant="method"] { border-left-color: var(--lens-method-border); }
+
+    /* Cross-Column Spotlight Glow for Matching Dominant Card */
+    body.spotlight-active .annotation-card.card-spotlight-hit {
+      transform: translateY(-2px);
+    }
+    body.spotlight-active .annotation-card.card-spotlight-hit[data-dominant="thesis"] {
+      box-shadow: 0 0 0 1px rgba(217, 119, 6, 0.35), 0 8px 24px rgba(217, 119, 6, 0.16);
+      border-color: rgba(217, 119, 6, 0.45);
+    }
+    body.spotlight-active .annotation-card.card-spotlight-hit[data-dominant="concept"] {
+      box-shadow: 0 0 0 1px rgba(225, 29, 72, 0.35), 0 8px 24px rgba(225, 29, 72, 0.16);
+      border-color: rgba(225, 29, 72, 0.45);
+    }
+    body.spotlight-active .annotation-card.card-spotlight-hit[data-dominant="evidence"] {
+      box-shadow: 0 0 0 1px rgba(2, 132, 199, 0.35), 0 8px 24px rgba(2, 132, 199, 0.16);
+      border-color: rgba(2, 132, 199, 0.45);
+    }
+    body.spotlight-active .annotation-card.card-spotlight-hit[data-dominant="rebuttal"] {
+      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.35), 0 8px 24px rgba(22, 163, 74, 0.16);
+      border-color: rgba(22, 163, 74, 0.45);
+    }
+    body.spotlight-active .annotation-card.card-spotlight-hit[data-dominant="method"] {
+      box-shadow: 0 0 0 1px rgba(147, 51, 234, 0.35), 0 8px 24px rgba(147, 51, 234, 0.16);
+      border-color: rgba(147, 51, 234, 0.45);
+    }
 
     .card-tier {
       margin-bottom: 1.15rem;
@@ -862,6 +934,7 @@
       box-shadow: var(--shadow-md);
       margin-top: 3.5rem;
       margin-bottom: 3rem;
+      scroll-margin-top: 4.75rem;
     }
 
     .dashboard-header {
@@ -914,7 +987,7 @@
     .skeleton-pipeline {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      gap: 0.75rem;
+      gap: 1.35rem;
       position: relative;
     }
 
@@ -927,6 +1000,21 @@
       display: flex;
       flex-direction: column;
       transition: all 0.2s ease;
+    }
+
+    @media (min-width: 1101px) {
+      .skeleton-node:not(:last-child)::after {
+        content: '→';
+        position: absolute;
+        top: 50%;
+        left: calc(100% + 0.675rem);
+        transform: translate(-50%, -50%);
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #94a3b8;
+        pointer-events: none;
+        line-height: 1;
+      }
     }
 
     .skeleton-node:hover {
@@ -1099,6 +1187,10 @@
         padding: 0.45rem 1rem;
         flex-direction: column;
         align-items: flex-start;
+        gap: 0.5rem;
+      }
+      .toolbar-sections {
+        width: 100%;
       }
       .critique-grid {
         grid-template-columns: 1fr;
@@ -1187,12 +1279,12 @@
       <div class="toolbar-controls">
         <div class="filter-group">
           <span class="filter-label">透镜:</span>
-          <button class="lens-btn active" data-dim="all" title="显示全部标注">全部</button>
-          <button class="lens-btn" data-dim="thesis" title="聚焦核心论点 (Thesis)"><span class="lens-dot"></span>论点</button>
-          <button class="lens-btn" data-dim="concept" title="聚焦关键概念 (Concept)"><span class="lens-dot"></span>概念</button>
-          <button class="lens-btn" data-dim="evidence" title="聚焦实证证据 (Evidence)"><span class="lens-dot"></span>证据</button>
-          <button class="lens-btn" data-dim="rebuttal" title="聚焦让步反驳 (Rebuttal)"><span class="lens-dot"></span>反驳</button>
-          <button class="lens-btn" data-dim="method" title="聚焦方法论 (Methodology)"><span class="lens-dot"></span>方法</button>
+          <button class="lens-btn active" data-dim="all" title="显示全部标注 (快捷键: 0)">全部</button>
+          <button class="lens-btn" data-dim="thesis" title="聚焦核心论点 (快捷键: 1)"><span class="lens-dot"></span>论点</button>
+          <button class="lens-btn" data-dim="concept" title="聚焦关键概念 (快捷键: 2)"><span class="lens-dot"></span>概念</button>
+          <button class="lens-btn" data-dim="evidence" title="聚焦实证证据 (快捷键: 3)"><span class="lens-dot"></span>证据</button>
+          <button class="lens-btn" data-dim="rebuttal" title="聚焦让步反驳 (快捷键: 4)"><span class="lens-dot"></span>反驳</button>
+          <button class="lens-btn" data-dim="method" title="聚焦方法论 (快捷键: 5)"><span class="lens-dot"></span>方法</button>
         </div>
 
         <div class="view-switcher">
@@ -1265,7 +1357,7 @@
       window.addEventListener('scroll', updateProgress, { passive: true });
       updateProgress();
 
-      // 3. Five-Lens Spotlight Filtering
+      // 3. Five-Lens Cross-Column Spotlight Filtering & Keyboard Shortcuts
       const lensBtns = document.querySelectorAll('.lens-btn');
       let currentSpotlight = 'all';
 
@@ -1291,9 +1383,14 @@
         });
 
         const allMarks = document.querySelectorAll('mark.hl');
+        const allRows = document.querySelectorAll('.para-row');
+        const allCards = document.querySelectorAll('.annotation-card');
+
         if (dim === 'all') {
           document.body.classList.remove('spotlight-active');
           allMarks.forEach(m => m.classList.remove('spotlight-target'));
+          allRows.forEach(r => r.classList.remove('row-has-spotlight', 'row-dimmed'));
+          allCards.forEach(c => c.classList.remove('card-spotlight-hit'));
         } else {
           document.body.classList.add('spotlight-active');
           allMarks.forEach(m => {
@@ -1303,8 +1400,55 @@
               m.classList.remove('spotlight-target');
             }
           });
+
+          allRows.forEach(row => {
+            const hasMark = row.querySelector(`mark.hl[data-dim="${dim}"]`) !== null;
+            const card = row.querySelector('.annotation-card');
+            const cardDominantMatches = card && card.getAttribute('data-dominant') === dim;
+
+            if (hasMark || cardDominantMatches) {
+              row.classList.add('row-has-spotlight');
+              row.classList.remove('row-dimmed');
+            } else {
+              row.classList.remove('row-has-spotlight');
+              row.classList.add('row-dimmed');
+            }
+
+            if (card) {
+              if (cardDominantMatches) {
+                card.classList.add('card-spotlight-hit');
+              } else {
+                card.classList.remove('card-spotlight-hit');
+              }
+            }
+          });
         }
       }
+
+      // Keyboard Shortcuts (0: All, 1: Thesis, 2: Concept, 3: Evidence, 4: Rebuttal, 5: Method)
+      const shortcutMap = {
+        '0': 'all',
+        '1': 'thesis',
+        '2': 'concept',
+        '3': 'evidence',
+        '4': 'rebuttal',
+        '5': 'method'
+      };
+
+      document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+        if (tag === 'input' || tag === 'textarea' || (e.target && e.target.isContentEditable)) return;
+
+        if (Object.prototype.hasOwnProperty.call(shortcutMap, e.key)) {
+          const targetDim = shortcutMap[e.key];
+          if (targetDim === currentSpotlight && targetDim !== 'all') {
+            setSpotlight('all');
+          } else {
+            setSpotlight(targetDim);
+          }
+        }
+      });
 
       // 4. View Mode Switcher
       const viewBtns = document.querySelectorAll('.view-btn');
@@ -1325,22 +1469,54 @@
         });
       });
 
-      // 5. Collapsible Translation Single Paragraph Toggle
-      document.querySelectorAll('.trans-collapse-toggle').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const transBlock = btn.closest('.trans-block');
-          if (transBlock) {
-            transBlock.classList.toggle('expanded');
-            const isExpanded = transBlock.classList.contains('expanded');
-            btn.innerHTML = isExpanded 
-              ? '<span class="toggle-arrow">▾</span> 收起中文译文' 
-              : '<span class="toggle-arrow">▸</span> 展开中文译文';
+      // 5. Collapsible Translation Full-Bar Hotspot Toggle
+      function toggleTransBlock(transBlock, forceExpand = null) {
+        if (!transBlock) return;
+        const isExpanded = forceExpand !== null ? forceExpand : !transBlock.classList.contains('expanded');
+        transBlock.classList.toggle('expanded', isExpanded);
+        const paraLeft = transBlock.closest('.para-left');
+        if (paraLeft) {
+          paraLeft.classList.toggle('has-expanded-trans', isExpanded);
+        }
+        const toggleBtn = transBlock.querySelector('.trans-collapse-toggle');
+        if (toggleBtn) {
+          toggleBtn.innerHTML = isExpanded
+            ? '<span class="toggle-arrow">▾</span> 收起中文译文'
+            : '<span class="toggle-arrow">▸</span> 展开中文译文';
+        }
+      }
+
+      document.querySelectorAll('.trans-block').forEach(transBlock => {
+        transBlock.addEventListener('click', (e) => {
+          if (!document.body.classList.contains('mode-collapsible')) return;
+          if (!transBlock.classList.contains('expanded')) {
+            e.stopPropagation();
+            toggleTransBlock(transBlock, true);
           }
         });
+
+        const toggleBtn = transBlock.querySelector('.trans-collapse-toggle');
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', (e) => {
+            if (!document.body.classList.contains('mode-collapsible')) return;
+            e.stopPropagation();
+            toggleTransBlock(transBlock);
+          });
+        }
       });
 
-      // 6. Sticky Section Anchor Spy (IntersectionObserver)
+      // 6. Horizontal Wheel Scroll Support for Long Section Nav
+      const toolbarSections = document.getElementById('toolbar-sections');
+      if (toolbarSections) {
+        toolbarSections.addEventListener('wheel', (e) => {
+          if (toolbarSections.scrollWidth > toolbarSections.clientWidth && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+            e.preventDefault();
+            toolbarSections.scrollLeft += e.deltaY;
+          }
+        }, { passive: false });
+      }
+
+      // 7. Sticky Section Anchor Spy (IntersectionObserver)
       const sectionBlocks = document.querySelectorAll('.section-block, .synthesis-dashboard');
       const navLinks = document.querySelectorAll('.nav-anchor-item');
 
