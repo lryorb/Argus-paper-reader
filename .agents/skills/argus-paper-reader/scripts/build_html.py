@@ -21,16 +21,41 @@ from pathlib import Path
 
 def normalize_zh_punctuation(text: str) -> str:
     """
-    Normalizes Chinese single quotes (‘...’ and CJK-wrapped '...') into
-    scholarly corner brackets 「...」 while preserving English apostrophes and math primes.
+    Protects math blocks ($$...$$, $...$, \\[...\\], \\(...\\)) and HTML tags (<...>),
+    then normalizes Chinese curly single quotes (‘...’) into corner brackets 「...」.
+    Never alters ASCII straight quotes (') to protect LaTeX transpose/primes and English contractions.
     """
     if not text or not isinstance(text, str):
         return text or ""
-    # Replace curly single quote pairs ‘...’ with 「...」
-    text = re.sub(r"\u2018([^\u2019\n]+)\u2019", r"「\1」", text)
-    # Replace ASCII single quotes '...' when containing at least one CJK character
-    text = re.sub(r"'([^'\n]*[\u4e00-\u9fff][^'\n]*)'", r"「\1」", text)
-    return text
+
+    protected_tokens = []
+
+    def _stash(match: re.Match) -> str:
+        idx = len(protected_tokens)
+        protected_tokens.append(match.group(0))
+        return f"\x00ARGUS_STASH_{idx}\x00"
+
+    protected_pattern = re.compile(
+        r"\$\$[\s\S]*?\$\$"
+        r"|\\\[[\s\S]*?\\\]"
+        r"|\\\([\s\S]*?\\\)"
+        r"|\$(?:\\.|[^$\\\n])+?\$"
+        r"|<[^>]+>"
+    )
+
+    stashed = protected_pattern.sub(_stash, text)
+    # Replace only curly single quote pairs ‘...’ -> 「...」
+    cleaned = re.sub(r"\u2018([^\u2019\n]+)\u2019", r"「\1」", stashed)
+
+    # Restore protected math blocks and HTML tags
+    if protected_tokens:
+        cleaned = re.sub(
+            r"\x00ARGUS_STASH_(\d+)\x00",
+            lambda m: protected_tokens[int(m.group(1))],
+            cleaned,
+        )
+
+    return cleaned
 
 
 def sanitize_chinese_fields(data: dict) -> dict:

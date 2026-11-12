@@ -1455,7 +1455,7 @@
           <hr class="para-divider">
           <div class="trans-block">
             <button class="trans-collapse-toggle" type="button"><span class="toggle-arrow">▸</span> 展开中文译文</button>
-            <div class="trans-content">为精确测度制度对经济绩效的净因果效应，本文采用两阶段最小二乘法（2SLS）构建结构计量模型。第二阶段方程将当代人均收入与产权制度保护程度建立如下映射：$$\log y_i = \mu + \alpha R_i + \mathbf{X}_i「 \gamma + \varepsilon_i$$ 其中 $y_i$ 表示样本国 $i$ 在 1995 年的对数人均实际国内生产总值；$R_i$ 为当代制度质量的代理指标，具体采用政治风险服务集团（PRS）评估的 1985 至 1995 年间「防范政府征收风险指数」；$\mathbf{X}_i$ 为一组基准控制变量向量，涵盖洲际虚拟变量、绝对纬度以及法系渊源。在第一阶段回归中，本文引入 19 世纪欧洲早期定居者死亡率对数 $\log M_i$ 作为核心工具变量：$$R_i = \zeta + \beta \log M_i + \mathbf{X}_i」 \delta + v_i$$ 该历史死亡率数据来源于驻防欧洲陆军与海军官兵每千人年化死亡记录。为确保该工具变量在计量上严格成立，$\log M_i$ 必须同时满足相关性假设（即 $\beta \neq 0$）与至关重要的排他性约束条件（$E[\log M_i \cdot \varepsilon_i] = 0$），即殖民者死亡率除通过塑造制度传承外，不得对当代经济产出产生任何未被控制的直接渠道影响。</div>
+            <div class="trans-content">为精确测度制度对经济绩效的净因果效应，本文采用两阶段最小二乘法（2SLS）构建结构计量模型。第二阶段方程将当代人均收入与产权制度保护程度建立如下映射：$$\log y_i = \mu + \alpha R_i + \mathbf{X}_i' \gamma + \varepsilon_i$$ 其中 $y_i$ 表示样本国 $i$ 在 1995 年的对数人均实际国内生产总值；$R_i$ 为当代制度质量的代理指标，具体采用政治风险服务集团（PRS）评估的 1985 至 1995 年间「防范政府征收风险指数」；$\mathbf{X}_i$ 为一组基准控制变量向量，涵盖洲际虚拟变量、绝对纬度以及法系渊源。在第一阶段回归中，本文引入 19 世纪欧洲早期定居者死亡率对数 $\log M_i$ 作为核心工具变量：$$R_i = \zeta + \beta \log M_i + \mathbf{X}_i' \delta + v_i$$ 该历史死亡率数据来源于驻防欧洲陆军与海军官兵每千人年化死亡记录。为确保该工具变量在计量上严格成立，$\log M_i$ 必须同时满足相关性假设（即 $\beta \neq 0$）与至关重要的排他性约束条件（$E[\log M_i \cdot \varepsilon_i] = 0$），即殖民者死亡率除通过塑造制度传承外，不得对当代经济产出产生任何未被控制的直接渠道影响。</div>
           </div>
         </div>
 
@@ -1618,7 +1618,7 @@
         <div class="skeleton-node">
           <div class="skeleton-step-tag">4. 证据 (Evidence)</div>
           <div class="skeleton-node-title">第一阶段强相关与巨幅效应</div>
-          <div class="skeleton-node-desc">第一阶段 F>20 彻底排除弱工具变量；2SLS 结构系数 α=0.94 (p<0.001)，制度标准差跃升带来近四倍收入增长。</div>
+          <div class="skeleton-node-desc">第一阶段 $F > 20$ 彻底排除弱工具变量；2SLS 结构系数 $\hat{\alpha} = 0.94$ ($p < 0.001$)，制度标准差跃升带来近四倍收入增长。</div>
         </div>
 
         <div class="skeleton-node">
@@ -1735,7 +1735,7 @@
           "index": 3,
           "dominant_dimension": "method",
           "en": "To estimate the causal effect of institutions on economic performance, we formulate the structural econometric relationship using two-stage least squares (2SLS). The second-stage equation relates current income per capita to institutional protection: <mark class=\"hl hl-method\" data-dim=\"method\" data-label=\"第二阶段回归方程\">$$\\log y_i = \\mu + \\alpha R_i + \\mathbf{X}_i' \\gamma + \\varepsilon_i$$</mark> where $y_i$ is GDP per capita in 1995 for country $i$, $R_i$ is contemporary institutional quality measured by the Political Risk Services index of protection against expropriation risk between 1985 and 1995, and $\\mathbf{X}_i$ is a vector of covariates including continent dummies, absolute latitude, and legal origins. In the first-stage regression, we instrument current institutions using the logarithm of historical European settler mortality: <mark class=\"hl hl-method\" data-dim=\"method\" data-label=\"第一阶段工具变量方程\">$$R_i = \\zeta + \\beta \\log M_i + \\mathbf{X}_i' \\delta + v_i$$</mark> where $M_i$ represents settler mortality rates per 1,000 per annum based on nineteenth-century military records. For $\\log M_i$ to serve as a valid instrumental variable, it must satisfy both <mark class=\"hl hl-concept\" data-dim=\"concept\" data-label=\"相关性条件\">relevance ($\\beta \\neq 0$)</mark> and the critical <mark class=\"hl hl-rebuttal\" data-dim=\"rebuttal\" data-label=\"排他性约束条件\">exclusion restriction ($E[\\log M_i \\cdot \\varepsilon_i] = 0$)</mark>, meaning mortality had no direct impact on modern prosperity other than through institutional persistence.",
-          "zh": "为精确测度制度对经济绩效的净因果效应，本文采用两阶段最小二乘法（2SLS）构建结构计量模型。第二阶段方程将当代人均收入与产权制度保护程度建立如下映射：$$\\log y_i = \\mu + \\alpha R_i + \\mathbf{X}_i「 \\gamma + \\varepsilon_i$$ 其中 $y_i$ 表示样本国 $i$ 在 1995 年的对数人均实际国内生产总值；$R_i$ 为当代制度质量的代理指标，具体采用政治风险服务集团（PRS）评估的 1985 至 1995 年间「防范政府征收风险指数」；$\\mathbf{X}_i$ 为一组基准控制变量向量，涵盖洲际虚拟变量、绝对纬度以及法系渊源。在第一阶段回归中，本文引入 19 世纪欧洲早期定居者死亡率对数 $\\log M_i$ 作为核心工具变量：$$R_i = \\zeta + \\beta \\log M_i + \\mathbf{X}_i」 \\delta + v_i$$ 该历史死亡率数据来源于驻防欧洲陆军与海军官兵每千人年化死亡记录。为确保该工具变量在计量上严格成立，$\\log M_i$ 必须同时满足相关性假设（即 $\\beta \\neq 0$）与至关重要的排他性约束条件（$E[\\log M_i \\cdot \\varepsilon_i] = 0$），即殖民者死亡率除通过塑造制度传承外，不得对当代经济产出产生任何未被控制的直接渠道影响。",
+          "zh": "为精确测度制度对经济绩效的净因果效应，本文采用两阶段最小二乘法（2SLS）构建结构计量模型。第二阶段方程将当代人均收入与产权制度保护程度建立如下映射：$$\\log y_i = \\mu + \\alpha R_i + \\mathbf{X}_i' \\gamma + \\varepsilon_i$$ 其中 $y_i$ 表示样本国 $i$ 在 1995 年的对数人均实际国内生产总值；$R_i$ 为当代制度质量的代理指标，具体采用政治风险服务集团（PRS）评估的 1985 至 1995 年间「防范政府征收风险指数」；$\\mathbf{X}_i$ 为一组基准控制变量向量，涵盖洲际虚拟变量、绝对纬度以及法系渊源。在第一阶段回归中，本文引入 19 世纪欧洲早期定居者死亡率对数 $\\log M_i$ 作为核心工具变量：$$R_i = \\zeta + \\beta \\log M_i + \\mathbf{X}_i' \\delta + v_i$$ 该历史死亡率数据来源于驻防欧洲陆军与海军官兵每千人年化死亡记录。为确保该工具变量在计量上严格成立，$\\log M_i$ 必须同时满足相关性假设（即 $\\beta \\neq 0$）与至关重要的排他性约束条件（$E[\\log M_i \\cdot \\varepsilon_i] = 0$），即殖民者死亡率除通过塑造制度传承外，不得对当代经济产出产生任何未被控制的直接渠道影响。",
           "annotation": {
             "function": "两阶段计量模型设定与识别条件推演",
             "logical_role": "将前述理论机制形式化为严谨的 2SLS 因果识别框架，明确界定内生变量、工具变量与排他性约束条件。",
@@ -1783,7 +1783,7 @@
       {
         "step": "4. 证据 (Evidence)",
         "title": "第一阶段强相关与巨幅效应",
-        "desc": "第一阶段 F>20 彻底排除弱工具变量；2SLS 结构系数 α=0.94 (p<0.001)，制度标准差跃升带来近四倍收入增长。"
+        "desc": "第一阶段 $F > 20$ 彻底排除弱工具变量；2SLS 结构系数 $\\hat{\\alpha} = 0.94$ ($p < 0.001$)，制度标准差跃升带来近四倍收入增长。"
       },
       {
         "step": "5. 反驳 (Rebuttal)",
